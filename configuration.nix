@@ -32,6 +32,16 @@
     enable = true;
   };
 
+  systemd.user.services.xwayland = {
+    description = "XWayland bridge for legacy X11 apps";
+    wantedBy = [ "default.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.xwayland}/bin/Xwayland :0 -rootless -terminate";
+      Restart = "on-failure";
+    };
+  };
+
+
   # Bootloader configuration
   boot.loader.systemd-boot.enable = false;
   boot.loader.grub = {
@@ -79,13 +89,17 @@
 
 
   # Login manager and compositor (greetd + niri)
-  services.greetd.enable = false;
-
-  services.displayManager.sddm = {
+  services.greetd = {
     enable = true;
-    wayland.enable = true;
-    theme = "where-is-my-sddm-theme"; # optional, or pick your own
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd niri";
+      };
+    };
   };
+
+  programs.niri.enable = true;
+  programs.xwayland.enable = true;
 
   services.desktopManager.plasma6.enable = false; # disable DE if you just want niri
   services.xserver.windowManager.session = [
@@ -94,9 +108,6 @@
       start = "${pkgs.niri}/bin/niri";
     }
   ];
-
-  # Niri (system level)
-  programs.niri.enable = true;
 
 
   # Printing service
