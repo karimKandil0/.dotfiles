@@ -32,15 +32,6 @@
     enable = true;
   };
 
-  systemd.user.services.xwayland = {
-    description = "XWayland bridge for legacy X11 apps";
-    wantedBy = [ "default.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.xwayland}/bin/Xwayland :0 -rootless -terminate";
-      Restart = "on-failure";
-    };
-  };
-
 
   # Bootloader configuration
   boot.loader.systemd-boot.enable = false;
