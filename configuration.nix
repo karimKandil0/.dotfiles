@@ -30,8 +30,6 @@
   # Enable steam
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
   };
 
   # Bootloader configuration
@@ -89,7 +87,7 @@
     theme = "where-is-my-sddm-theme"; # optional, or pick your own
   };
 
-  services.xserver.desktopManager.plasma6.enable = false; # disable DE if you just want niri
+  services.desktopManager.plasma6.enable = false; # disable DE if you just want niri
   services.xserver.windowManager.session = [
     {
       name = "niri";
