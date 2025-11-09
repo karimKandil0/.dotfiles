@@ -1,0 +1,3 @@
+[general]
+import = ["~/.cache/wal/alacritty.toml"]
+
