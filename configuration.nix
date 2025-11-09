@@ -86,7 +86,7 @@
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    theme = "chili"; # optional, or pick your own
+    theme = "where-is-my-sddm-theme"; # optional, or pick your own
   };
 
   services.xserver.desktopManager.plasma6.enable = false; # disable DE if you just want niri
@@ -128,7 +128,7 @@
   # Packages installed system-wide
   environment.systemPackages = with pkgs; [
     vim
-    sddm-chili-theme
+    where-is-my-sddm-theme
     yq
     wget
     git
