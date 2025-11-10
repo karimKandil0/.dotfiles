@@ -84,7 +84,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd niri";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd '${pkgs.xwayland}/bin/Xwayland :0 -rootless -terminate & exec niri'";
       };
     };
   };
@@ -130,6 +130,7 @@
     vim
     where-is-my-sddm-theme
     yq
+    pulseaudio
     wget
     git
     nitch
@@ -141,6 +142,7 @@
     niri
     keyd
     kitty
+    alsa-utils
     pulsemixer
     fastfetch
     swww
@@ -198,6 +200,10 @@
     fsType = "ext4";
     options = [ "defaults" "nofail" ];
   };
+
+  boot.extraModprobeConfig = ''
+    options snd_hda_intel model=dell-headset-multi
+  '';
 
 
   # This determines which NixOS release’s defaults to use.
