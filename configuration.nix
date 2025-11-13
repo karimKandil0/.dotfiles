@@ -32,16 +32,35 @@
     enable = true;
   };
 
+  # Fonts setup
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    terminus_font
+  ];
 
   # Bootloader configuration
-  boot.loader.systemd-boot.enable = false;
-  boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-    device = "nodev"; # for EFI installs
-    useOSProber = true; # detects Windows/Linux dual boot
+  boot.loader = {
+    systemd-boot.enable = true;
+    timeout = 0;
+    efi.canTouchEfiVariables = true;
+    efi.efiSysMountPoint = "/boot";
+    systemd-boot.consoleMode = "max";
   };
-  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Correct modern NixOS option
+  console.font = "Lat2-Terminus16";
+
+  boot.kernelParams = [
+    # Gruvbox dark background (#1d2021)
+    "vt.default_bg_red=0x1d"
+    "vt.default_bg_green=0x20"
+    "vt.default_bg_blue=0x21"
+
+    # Gruvbox light foreground (#ebdbb2)
+    "vt.default_fg_red=0xeb"
+    "vt.default_fg_green=0xdb"
+    "vt.default_fg_blue=0xb2"
+  ];
 
   # Use the latest available Linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -124,11 +143,20 @@
   # Enable some basic programs/functions
   programs.bash.completion.enable = true;
   programs.firefox.enable = true;
+  programs.gamemode.enable = true;
 
   # Packages installed system-wide
   environment.systemPackages = with pkgs; [
+    kbd
+    terminus_font
+    efibootmgr
+    wineWowPackages.stable
+    winetricks
+    dxvk
+    vkd3d
+    mangohud
+    gamemode
     vim
-    where-is-my-sddm-theme
     yq
     pulseaudio
     wget
@@ -173,11 +201,6 @@
     };
   };
 
-  # Fonts setup
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
-
   # Enable SSH
   services.openssh.enable = true;
 
@@ -193,6 +216,7 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
+
 
   # Define storage drive
   fileSystems."/mnt/data" = {

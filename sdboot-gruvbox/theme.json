@@ -1,0 +1,13 @@
+{
+  "name": "gruvbox-minimal",
+  "background": "#1d2021",
+  "foreground": "#ebdbb2",
+  "accent": "#d79921",
+  "highlight-background": "#3c3836",
+  "highlight-foreground": "#fabd2f",
+  "font-size": 16,
+  "icon-size": 24,
+  "layout": "center",
+  "show-icons": true
+}
+
