@@ -1,84 +1,68 @@
-{ config, pkgs, zen-browser, zed, ... }:
-let
-  dotfiles = "${config.home.homeDirectory}/.dotfiles/config";
+{ config, pkgs, lib, zen-browser, ... }:
 
-  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+let
+  myZen = zen-browser.packages.${pkgs.system}.default;
 in
 {
   home.username = "karimkandil";
   home.homeDirectory = "/home/karimkandil";
-
-  programs.git.enable = true;
-
   home.stateVersion = "25.05";
 
-  programs.kitty.settings = {
-    shell = "bash --login";
-  };
-
+  programs.git.enable = true;
   programs.bash = {
+    enable = true; 
+    shellAliases = {
+      srs = "sudo nixos-rebuild switch --flake ~/.dotfiles#k-nix";
+    };
+  };
+
+  programs.zed-editor = {
     enable = true;
-    enableCompletion = true;
-    bashrcExtra = ''
-      PS1="\w $ "
-    '';
   };
-  xdg.configFile."niri" = {
-    source = create_symlink "${dotfiles}/niri/";
+
+  home.packages = with pkgs; [
+    myZen
+    cmatrix
+    gemini-cli
+    kitty
+    neovim
+    ripgrep
+    nil
+    nixpkgs-fmt
+    wireshark
+    nodejs
+    clipit
+    gcc
+    chatgpt-cli
+  ];
+
+  xdg.configFile."qtile" = {
+    source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/qtile";
     recursive = true;
   };
 
-
+  xdg.configFile."i3" = {
+    source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/i3";
+    recursive = true;
+  };
+  
   xdg.configFile."nvim" = {
-    source = create_symlink "${dotfiles}/nvim/";
+    source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/nvim";
     recursive = true;
   };
-
-  # xdg.configFile."kitty" = {
-  #  source = create_symlink "${dotfiles}/kitty/";
-  #  recursive = true;
-  #};
-
-
-  home.packages = with pkgs;
-    [
-      neovim
-      ripgrep
-      nil
-      vlc
-      nixpkgs-fmt
-      nodejs
-      gcc
-      dnsutils
-      playerctl
-      cava
-      cmatrix
-      rustc
-      pipes
-      wofi
-      tmux
-      rustup
-      zen-browser.packages.${pkgs.system}.default
-      glib
-      libsecret
-      dbus
-      zed.packages.${pkgs.system}.default
-    ];
+   
+  xdg.configFile."hypr" = {
+    source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/hypr";
+    recursive = true;
+  };
 
   home.pointerCursor = {
+    name = "Bibata-Modern-Ice";
+    package = pkgs.bibata-cursors;
+    size = 24;
     gtk.enable = true;
     x11.enable = true;
-    name = "Bibata-Modern-Ice";
-    size = 12;
-    package = pkgs.bibata-cursors;
-  };
-
-  xdg.desktopEntries.zen-browser = {
-    name = "Zen Browser";
-    exec = "zen-browser";
-    terminal = false;
-    icon = "zen-browser";
-    categories = [ "Network" "WebBrowser" ];
   };
 
 }
+
