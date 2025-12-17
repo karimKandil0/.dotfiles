@@ -20,6 +20,8 @@ in
     "flakes"
   ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   boot.supportedFilesystems = ["ntfs" "ntfs3"];
 
   fileSystems."/mnt/steam-library" = {
@@ -124,6 +126,7 @@ in
     git
     bibata-cursors
     vim
+    ripgrep
     vial
     curl
     xplr
@@ -144,6 +147,8 @@ in
     pulsemixer
     pulseaudio
     unrar
+    zoxide 
+    tree
     wineWowPackages.stable
     winetricks
   ];

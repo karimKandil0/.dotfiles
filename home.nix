@@ -8,7 +8,16 @@ in
   home.homeDirectory = "/home/karimkandil";
   home.stateVersion = "25.05";
 
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "karimKandil0";
+    userEmail = "kimo989yt@gmail.com";
+  };
+
+  programs.gh = {
+    enable = true;
+  };
+
   programs.bash = {
     enable = true; 
     shellAliases = {
