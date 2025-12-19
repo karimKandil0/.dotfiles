@@ -24,17 +24,12 @@ in
 
   boot.supportedFilesystems = ["ntfs" "ntfs3"];
 
-  fileSystems."/mnt/steam-library" = {
-  device = "/dev/disk/by-uuid/FE88D9B488D96C21";
-  fsType = "ntfs";
-  options = [ 
-    "rw" 
-    "uid=1000" 
-    "gid=100" 
-    "umask=007"
-    "nofail"
-  ];
-};
+  fileSystems."/mnt/data" = {
+    device = "/dev/disk/by-uuid/69504f9c-0053-470c-99e6-e2340e672759";
+    fsType = "ext4";
+  };
+
+  
 
   
   #######################
@@ -158,6 +153,12 @@ in
   ];
 
   services.udev.packages = [ pkgs.vial ];
+
+  system.activationScripts.steamDataDir = ''
+    mkdir -p /mnt/data/steam
+    chown ${user}:users /mnt/data/steam
+  '';
+
   programs.steam.enable = true;
 
   ##################
