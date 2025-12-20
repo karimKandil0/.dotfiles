@@ -96,7 +96,7 @@ in
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.latest;
 
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     powerManagement.finegrained = false;
   };
 
