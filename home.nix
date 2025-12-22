@@ -37,14 +37,12 @@ in
     gemini-cli
     kitty
     neovim
-    ripgrep
     nil
     nixpkgs-fmt
     wireshark
     nodejs
     clipit
     gcc
-    chatgpt-cli
   ];
 
   xdg.configFile."qtile" = {

@@ -13,6 +13,9 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
 
   system.stateVersion = "25.05";
+  documentation.enable = false;
+  nix.optimise.automatic = true;
+  nix.optimise.dates = [ "daily" ];
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.experimental-features = [
@@ -40,8 +43,8 @@ in
     enable = true;
     autoRepeatDelay = 200;
     autoRepeatInterval = 35;
-    windowManager.qtile.enable = true;
-    windowManager.i3.enable = true;
+    windowManager.qtile.enable = false;
+    windowManager.i3.enable = false;
   };
 
   programs.hyprland.enable = true;
@@ -125,27 +128,19 @@ in
     vial
     curl
     xplr
-    wl-clipboard
     waybar
-    nitrogen
     kitty
-    hyprpaper
     firefox
     swww
-    wofi
     thonny
     pywal
     rofi
-    feh
     fastfetch
     alsa-utils
     pulsemixer
     pulseaudio
     unrar
-    zoxide 
     tree
-    wineWowPackages.stable
-    winetricks
   ];
    
   fonts.packages = with pkgs; [
