@@ -27,6 +27,8 @@ in
 
   programs.zed-editor = {
     enable = true;
+    installRemoteServer = true;
+    extraPackages = [ ];
   };
 
   home.packages = with pkgs; [
