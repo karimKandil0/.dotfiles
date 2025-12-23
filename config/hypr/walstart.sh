@@ -11,7 +11,8 @@ INTERVAL=300  # 5 minutes
 
 # Start swww daemon if it's not already running
 if ! pgrep -x "swww-daemon" >/dev/null 2>&1; then
-    swww init
+    swww-daemon >/dev/null 2>&1 &
+    sleep 1
 fi
 
 # Create history file if it doesn't exist

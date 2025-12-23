@@ -1,5 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, zen-browser, ... }:
 
+let
+  myZen = zen-browser.packages.${pkgs.system}.default;
+in
 {
   home.username = "karimkandil";
   home.homeDirectory = "/home/karimkandil";
@@ -26,7 +29,10 @@
     };
   };
 
+
   home.packages = with pkgs; [
+    myZen
+    zed-editor
     cmatrix
     gemini-cli
     kitty

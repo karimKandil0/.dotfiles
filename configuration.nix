@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, zen-browser, ... }:
 
 let
   user = "karimkandil";
@@ -15,7 +15,7 @@ in
   system.stateVersion = "25.05";
   documentation.enable = false;
   nix.optimise.automatic = true;
-  nix.optimise.dates = [ "daily" ];
+  nix.optimise.dates = [ "weekly" ];
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.experimental-features = [
