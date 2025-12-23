@@ -1,5 +1,5 @@
 {
-  description = "Minimal NixOS + Home Manager flake with Hyprland and zen-browser";
+  description = "Minimal NixOS + Home Manager flake with Hyprland";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-25.11";
@@ -8,12 +8,9 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Keep your zen-browser flake
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
-  outputs = { self, nixpkgs, home-manager, zen-browser, ... }:
+  outputs = { self, nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
     in
@@ -23,13 +20,10 @@
         modules = [
           ./configuration.nix
           {
-            home-manager.extraSpecialArgs = { inherit zen-browser; };
             home-manager.users.karimkandil = ./home.nix;
           }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { inherit zen-browser; };
       };
     };
 }
-

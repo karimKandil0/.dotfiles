@@ -1,8 +1,5 @@
-{ config, pkgs, lib, zen-browser, ... }:
+{ config, pkgs, lib, ... }:
 
-let
-  myZen = zen-browser.packages.${pkgs.system}.default;
-in
 {
   home.username = "karimkandil";
   home.homeDirectory = "/home/karimkandil";
@@ -10,8 +7,12 @@ in
 
   programs.git = {
     enable = true;
-    userName = "karimKandil0";
-    userEmail = "kimo989yt@gmail.com";
+    settings = {
+      user = {
+        name = "karimKandil0";
+        email = "kimo989yt@gmail.com";
+      };
+    };
   };
 
   programs.gh = {
@@ -25,14 +26,7 @@ in
     };
   };
 
-  programs.zed-editor = {
-    enable = true;
-    installRemoteServer = true;
-    extraPackages = [ ];
-  };
-
   home.packages = with pkgs; [
-    myZen
     cmatrix
     gemini-cli
     kitty
@@ -74,4 +68,3 @@ in
   };
 
 }
-
