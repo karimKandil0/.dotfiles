@@ -122,6 +122,7 @@ in
   ##################
   environment.systemPackages = with pkgs; [
     git
+    zed-editor
     bibata-cursors
     vim
     ripgrep
