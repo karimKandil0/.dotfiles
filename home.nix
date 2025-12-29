@@ -32,6 +32,7 @@ in
 
   home.packages = with pkgs; [
     myZen
+    dmidecode
     zed-editor
     cmatrix
     gemini-cli
