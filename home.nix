@@ -37,6 +37,7 @@ in
     cmatrix
     gemini-cli
     kitty
+    jdk17
     neovim
     nil
     nixpkgs-fmt

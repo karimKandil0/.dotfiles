@@ -33,6 +33,34 @@ in
   };
 
   
+  #######################
+  #  MINECRAFT SERVER   #
+  #######################
+
+  services.minecraft-server = {
+    enable = true;
+    eula = true;
+
+    package = pkgs.papermc;
+
+    openFirewall = true;
+
+    declarative = true;
+    serverProperties = {
+      server-port = 25565;
+      motd = "za'azee' multiverse";
+      gamemode = "survival";
+      difficulty = "normal";
+
+      view-distance = 10;
+      simulation-distance = 8;
+
+      online-mode = false;
+      enforce-secure-profile = false;
+    };
+
+    jvmOpts = "-Xmx4G -Xms4G";
+  };
 
   
   #######################
@@ -89,7 +117,10 @@ in
   ##################
   #   GRAPHICS     #
   ##################
-  hardware.graphics.enable = true;
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+  };
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
@@ -135,6 +166,7 @@ in
     swww
     thonny
     pywal
+    steam-run
     rofi
     fastfetch
     alsa-utils
@@ -156,12 +188,14 @@ in
   '';
 
   programs.steam.enable = true;
+  programs.gamemode.enable = true;
 
   ##################
   #   NETWORKING   #
   ##################
 
   networking.networkmanager.enable = true;
+  services.power-profiles-daemon.enable = true;
 
   ##################
   #     OTHER      #
