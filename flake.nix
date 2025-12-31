@@ -17,6 +17,7 @@
   outputs = { self, nixpkgs, home-manager, zen-browser, ... }:
     let
       system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
     in
     {
       nixosConfigurations.k-nix = nixpkgs.lib.nixosSystem {
