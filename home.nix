@@ -1,7 +1,7 @@
 { config, pkgs, lib, zen-browser, ... }:
 
 let
-  myZen = zen-browser.packages.${pkgs.system}.default;
+  myZen = zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in
 {
 

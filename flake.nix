@@ -24,7 +24,7 @@
         modules = [
           ./configuration.nix
           {
-            home-manager.extraSpecialArgs = { inherit zen-browser; };
+            home-manager.extraSpecialArgs = { inherit zen-browser pkgs; };
             home-manager.users.karimkandil = ./home.nix;
           }
           home-manager.nixosModules.home-manager
