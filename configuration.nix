@@ -41,9 +41,17 @@ in
     enable = true;
     eula = true;
 
-    package = pkgs.papermc;
+    package = pkgs.papermc.overrideAttrs (finalAttrs: previousAttrs: rec {
+    version = "1.21.11";
+    build = "69"; 
+    
+    src = pkgs.fetchurl {
+        url = "https://api.papermc.io/v2/projects/paper/versions/${version}/builds/${build}/downloads/paper-${version}-${build}.jar";
+        sha256 = "cf374f2af9d71dfcc75343f37b722a7abcb091c574131b95e3b13c6fc2cb8fae";
+    };
+});
 
-    openFirewall = true;
+    openFirewall = false;
 
     declarative = true;
     serverProperties = {
@@ -57,10 +65,17 @@ in
 
       online-mode = false;
       enforce-secure-profile = false;
+      white-list = true;
+      enable-rcon = true;
+      "rcon.password" = "karimkandil1324";
+      level-seed = "-1110700258100175300";
     };
 
     jvmOpts = "-Xmx4G -Xms4G";
   };
+  
+  ### Manually open ports for game ###
+  networking.firewall.allowedTCPPorts = [ 25565 ];
 
   
   #######################
@@ -162,17 +177,18 @@ in
     xplr
     waybar
     kitty
+    rcon-cli
     firefox
     swww
     thonny
     pywal
-    steam-run
     rofi
     fastfetch
     alsa-utils
     pulsemixer
     pulseaudio
     unrar
+    tailscale
     tree
   ];
    
@@ -196,6 +212,10 @@ in
 
   networking.networkmanager.enable = true;
   services.power-profiles-daemon.enable = true;
+  services.tailscale.enable = true;
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
+
+  networking.firewall.allowedUDPPorts = [ 41631 25565 ];
 
   ##################
   #     OTHER      #

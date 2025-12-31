@@ -4,9 +4,14 @@ let
   myZen = zen-browser.packages.${pkgs.system}.default;
 in
 {
+
+  # General #
+
   home.username = "karimkandil";
   home.homeDirectory = "/home/karimkandil";
   home.stateVersion = "25.05";
+
+  # Git Config #
 
   programs.git = {
     enable = true;
@@ -22,13 +27,16 @@ in
     enable = true;
   };
 
+  # Shell #
+
   programs.bash = {
-    enable = true; 
+    enable = true;
     shellAliases = {
       srs = "sudo nixos-rebuild switch --flake ~/.dotfiles#k-nix";
     };
   };
 
+  # Pkgs #
 
   home.packages = with pkgs; [
     myZen
@@ -37,7 +45,6 @@ in
     cmatrix
     gemini-cli
     kitty
-    jdk17
     neovim
     nil
     nixpkgs-fmt
@@ -45,7 +52,11 @@ in
     nodejs
     clipit
     gcc
+    prismlauncher
+    jdk17
   ];
+
+  # SymLinks #
 
   xdg.configFile."qtile" = {
     source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/qtile";
@@ -56,16 +67,18 @@ in
     source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/i3";
     recursive = true;
   };
-  
+
   xdg.configFile."nvim" = {
     source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/nvim";
     recursive = true;
   };
-   
+
   xdg.configFile."hypr" = {
     source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/hypr";
     recursive = true;
   };
+
+  # Other #
 
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";
