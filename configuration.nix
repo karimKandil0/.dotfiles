@@ -2,6 +2,21 @@
 
 let
   user = "karimkandil";
+  playit = pkgs.stdenv.mkDerivation rec {
+    pname = "playit";
+    version = "0.17.0-rc2";
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/playit-cloud/playit-agent/releases/download/v0.17.0-rc2/playit-linux-amd64";
+      sha256 = "12f52963687156c8d6633442904e68c4ed6906910e157fb935f56259892b2a10";
+    };
+
+    dontUnpack = true;
+
+    installPhase = ''
+      install -D $src $out/bin/playit
+    '';
+  };
 in
 {
   imports = [
@@ -16,6 +31,7 @@ in
   documentation.enable = false;
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "weekly" ];
+  virtualisation.docker.enable = true;
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.experimental-features = [
@@ -60,8 +76,8 @@ in
       gamemode = "survival";
       difficulty = "normal";
 
-      view-distance = 10;
-      simulation-distance = 8;
+      view-distance = 6;
+      simulation-distance = 4;
 
       online-mode = false;
       enforce-secure-profile = false;
@@ -71,13 +87,30 @@ in
       level-seed = "-1110700258100175300";
     };
 
-    jvmOpts = "-Xmx4G -Xms4G";
-  };
-  
-  ### Manually open ports for game ###
-  networking.firewall.allowedTCPPorts = [ 25565 ];
+    jvmOpts = "-Xmx6G -Xms6G -Dpaper.playerconnection.keepalive=120 -Djava.net.preferIPv4Stack=true";
 
-  
+    whitelist = {
+      "karimkandil" = "28671171-8392-3708-9700-7b69be3d02e5";
+      "0marMC" = "cac77651-5372-34a0-88f1-c11725caf073";
+      "Ikllz" = "d4186b6f-1b88-37d1-8627-2ba88983fd5a";
+      "doda" = "e50e0c35-8f11-3934-b9b1-654f33e402da";
+      "omarhabib17" = "549eabd8-16d2-3c97-8098-ef82109ec9c1";
+    };
+  };
+
+  systemd.services.playit = {
+    description = "Playit.gg Tunnel";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "simple";
+      User = user;
+      ExecStart = "${playit}/bin/playit";
+      Restart = "on-failure";
+      RestartSec = "5s";
+    };
+  };
+
   #######################
   #    QTILE+XSERVER    #
   #######################
@@ -101,7 +134,6 @@ in
   };
   services.udisks2.enable = true;
   security.polkit.enable = true;  
-
   #######################
   #       PORTALS       #
   #######################
@@ -160,7 +192,7 @@ in
   ##################
   users.users.${user} = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "video" "seat" "input" "uinputl" "plugdev" "seatd" ];
+    extraGroups = [ "docker" "networkmanager" "wheel" "video" "seat" "input" "uinputl" "plugdev" "seatd" ];
   };
 
   ##################
@@ -171,7 +203,18 @@ in
     zed-editor
     bibata-cursors
     vim
+    libimobiledevice
+    ifuse
+    altserver-linux
+    discord
     ripgrep
+    btop
+    ncdu
+    fzf
+    bat
+    docker
+    openssl
+    zlib
     vial
     curl
     xplr
@@ -190,6 +233,7 @@ in
     unrar
     tailscale
     tree
+    playit
   ];
    
   fonts.packages = with pkgs; [
@@ -205,6 +249,7 @@ in
 
   programs.steam.enable = true;
   programs.gamemode.enable = true;
+  services.usbmuxd.enable = true;
 
   ##################
   #   NETWORKING   #
@@ -212,10 +257,15 @@ in
 
   networking.networkmanager.enable = true;
   services.power-profiles-daemon.enable = true;
+  programs.mosh.enable = true;
   services.tailscale.enable = true;
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
 
-  networking.firewall.allowedUDPPorts = [ 41631 25565 ];
+    networking.firewall = {
+    enable = true;
+    allowedUDPPorts = [ 19132 41631 25565 443 8080 ]; 
+    allowedTCPPorts = [ 25565 25575 22 ];
+  };
 
   ##################
   #     OTHER      #

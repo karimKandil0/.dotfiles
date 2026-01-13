@@ -10,7 +10,6 @@ in
   home.username = "karimkandil";
   home.homeDirectory = "/home/karimkandil";
   home.stateVersion = "25.05";
-
   # Git Config #
 
   programs.git = {
@@ -38,6 +37,10 @@ in
 
   # Pkgs #
 
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
+
   home.packages = with pkgs; [
     myZen
     dmidecode
@@ -49,11 +52,14 @@ in
     nil
     nixpkgs-fmt
     wireshark
+    wine
+    chatgpt-cli
     nodejs
     clipit
     gcc
     prismlauncher
     jdk17
+    winetricks
   ];
 
   # SymLinks #
