@@ -52,6 +52,7 @@ in
     nil
     nixpkgs-fmt
     wireshark
+    nemo
     wine
     chatgpt-cli
     nodejs

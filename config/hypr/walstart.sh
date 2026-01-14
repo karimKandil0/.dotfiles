@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/home/karimkandil/.nix-profile/bin/bash
 
 # Directory containing your wallpapers
 WALL_DIR="$HOME/Walls/All/"
@@ -7,7 +7,7 @@ WALL_DIR="$HOME/Walls/All/"
 HISTORY_FILE="$HOME/.cache/wal_history"
 
 # Time between wallpaper changes (seconds)
-INTERVAL=600  # 10
+INTERVAL=500  # idk
 
 # Start swww daemon if it's not already running
 if ! pgrep -x "swww-daemon" >/dev/null 2>&1; then
@@ -48,7 +48,8 @@ while true; do
     IMG="${UNUSED_WALLPAPERS[RANDOM % ${#UNUSED_WALLPAPERS[@]}]}"
 
     # Set wallpaper with swww (you can tweak transition options)
-    swww img "$IMG" --outputs "*" --transition-type fade --transition-duration 1
+    swww img "$IMG" --outputs "DVI-D-1" --transition-type fade --transition-duration 1
+    swww img "$IMG" --outputs "HDMI-A-1" --transition-type fade --transition-duration 1
 
     # Generate colorscheme with wal based on the current wallpaper
     wal -i "$IMG"
