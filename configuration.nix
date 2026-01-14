@@ -27,7 +27,7 @@ in
   time.timeZone = "Africa/Cairo";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
   documentation.enable = false;
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "weekly" ];
@@ -272,6 +272,8 @@ in
   ##################
 
   services.openssh.enable = true;
+
+  swapDevices = [ { device = "/swapfile"; size = 8192; } ];
 
   # Bootloader — enable systemd-boot (EFI). Keep these if your system boots with EFI.
   boot.loader.systemd-boot.enable = true;

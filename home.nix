@@ -9,7 +9,7 @@ in
 
   home.username = "karimkandil";
   home.homeDirectory = "/home/karimkandil";
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
   # Git Config #
 
   programs.git = {
