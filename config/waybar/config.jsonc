@@ -1,0 +1,15 @@
+{
+    "position": "top",
+    "mode": "dock",
+    "height": 25,
+    "margin-right": 10,
+    "margin-left": 10,
+    "margin-top": 6,
+    "modules-left": [],
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": [],
+    "hyprland/workspaces": {
+        "format": "•",
+        "on-click": "activate"
+    }
+}

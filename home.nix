@@ -32,6 +32,7 @@ in
     enable = true;
     shellAliases = {
       srs = "sudo nixos-rebuild switch --flake ~/.dotfiles#k-nix";
+      dots = "sudo nvim ~/.dotfiles";
     };
   };
 
@@ -44,36 +45,23 @@ in
   home.packages = with pkgs; [
     myZen
     dmidecode
-    zed-editor
     cmatrix
     gemini-cli
     kitty
     neovim
     nil
+    tor-browser
     nixpkgs-fmt
     wireshark
     nemo
-    wine
-    chatgpt-cli
     nodejs
-    clipit
+    w3m
     gcc
     prismlauncher
     jdk17
-    winetricks
   ];
 
   # SymLinks #
-
-  xdg.configFile."qtile" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/qtile";
-    recursive = true;
-  };
-
-  xdg.configFile."i3" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/i3";
-    recursive = true;
-  };
 
   xdg.configFile."nvim" = {
     source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/nvim";
@@ -85,7 +73,21 @@ in
     recursive = true;
   };
 
-  # Other #
+  xdg.configFile."qutebrowser/config.py" = {
+    source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/qutebrowser/config.py";
+    recursive = true;
+  };
+
+  programs.waybar = {
+    enable = true;
+  };
+
+  xdg.configFile."waybar" = {
+    source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/waybar";
+    recursive = true;
+  };
+ 
+   # Other #
 
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";

@@ -1,0 +1,25 @@
+* {
+    border: none;
+    font-family: "JetBrains Mono Nerd Font";
+    font-size: 20px;
+    min-height: 0;
+}
+
+#waybar {
+    background: #0E0B06;
+    border-radius: 5px;
+}
+
+#workspaces button {
+    color: #70798C;
+    padding: 9px;
+}
+
+#workspaces button.active {
+    color: #ffffff;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+

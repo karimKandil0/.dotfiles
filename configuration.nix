@@ -87,7 +87,7 @@ in
       level-seed = "-1110700258100175300";
     };
 
-    jvmOpts = "-Xmx6G -Xms6G -Dpaper.playerconnection.keepalive=120 -Djava.net.preferIPv4Stack=true";
+    jvmOpts = "-Xmx6G -Xms6G";
 
     whitelist = {
       "karimkandil" = "28671171-8392-3708-9700-7b69be3d02e5";
@@ -98,18 +98,18 @@ in
     };
   };
 
+
   systemd.services.playit = {
-    description = "Playit.gg Tunnel";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "simple";
-      User = user;
-      ExecStart = "${playit}/bin/playit";
-      Restart = "on-failure";
-      RestartSec = "5s";
-    };
+  description = "Playit.gg Service";
+  after = [ "network.target" ];
+  wantedBy = [ "multi-user.target" ];
+  serviceConfig = {
+    ExecStart = "${playit}/bin/playit";
+    Restart = "always";
+    User = "karimkandil"; # Use your actual NixOS username
+    WorkingDirectory = "/home/karimkandil";
   };
+};
 
   #######################
   #    QTILE+XSERVER    #
@@ -119,8 +119,6 @@ in
     enable = true;
     autoRepeatDelay = 200;
     autoRepeatInterval = 35;
-    windowManager.qtile.enable = false;
-    windowManager.i3.enable = false;
   };
 
   programs.hyprland.enable = true;
@@ -203,7 +201,6 @@ in
     zed-editor
     bibata-cursors
     vim
-    libimobiledevice
     ifuse
     altserver-linux
     discord
@@ -218,7 +215,6 @@ in
     vial
     curl
     xplr
-    waybar
     kitty
     rcon-cli
     firefox
@@ -234,6 +230,7 @@ in
     tailscale
     tree
     playit
+    (qutebrowser.override { enableWideVine = true; })
   ];
    
   fonts.packages = with pkgs; [
@@ -260,16 +257,20 @@ in
   programs.mosh.enable = true;
   services.tailscale.enable = true;
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
+  networking.enableIPv6 = true;
 
     networking.firewall = {
     enable = true;
     allowedUDPPorts = [ 19132 41631 25565 443 8080 ]; 
-    allowedTCPPorts = [ 25565 25575 22 ];
+    allowedTCPPorts = [ 25565 25575 22 43634 ];
   };
 
   ##################
   #     OTHER      #
   ##################
+
+  services.tor.enable = true;
+  services.tor.client.enable = true;
 
   services.openssh.enable = true;
 
@@ -279,6 +280,8 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 5;
+
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   hardware.keyboard.qmk.enable = true;
   
@@ -290,5 +293,6 @@ in
     XCURSOR_THEME = "Bibata-Modern-Ice";
     XCURSOR_SIZE = "24";
   };
+
 }
 
