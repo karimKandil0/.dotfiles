@@ -111,8 +111,37 @@ in
   };
 };
 
+  hardware.uinput.enable = true;
+
+
   #######################
-  #    QTILE+XSERVER    #
+  #    HOMEASSISTANT    #
+  #######################
+
+  services.home-assistant = {
+    enable = true;
+    extraPackages = python3Packages: with python3Packages;
+      [
+        gtts
+      ];
+    extraComponents = [
+      "default_config"
+      "tuya"
+    ];
+
+    config = {
+      default_config = {};
+      http = {
+        server_port = 8123;
+	trusted_proxies = [ "127.0.0.1" "::1" ];
+	use_x_forwarded_for = true;
+      };
+    };
+  };
+
+
+  #######################
+  #       DISPLAY       #
   #######################
 
   services.xserver = {
@@ -128,6 +157,9 @@ in
     enable = true;
     settings = {
       systemd = true;
+      animation = "matrix";
+      animate = true;
+      blank-box = false;
     };
   };
   services.udisks2.enable = true;
@@ -148,16 +180,25 @@ in
 
   services.dbus.enable = true;
 
-  ##################
-  #   AUDIO        #
-  ##################
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
+        ##################
+
+        #   AUDIO        #
+
+        ##################
+
+        security.rtkit.enable = true;
+
+        services.pipewire = {
+
+          enable = true;
+
+          alsa.enable = true;
+
+          alsa.support32Bit = true;
+
+          pulse.enable = true;
+
+        };
 
   ##################
   #   GRAPHICS     #
@@ -190,84 +231,108 @@ in
   ##################
   users.users.${user} = {
     isNormalUser = true;
-    extraGroups = [ "docker" "networkmanager" "wheel" "video" "seat" "input" "uinputl" "plugdev" "seatd" ];
+    extraGroups = [ "docker" "networkmanager" "wheel" "video" "seat" "input" "uinputl" "plugdev" "seatd" "lp" ];
   };
 
   ##################
   #   PACKAGES     #
   ##################
-  environment.systemPackages = with pkgs; [
-    git
-    zed-editor
-    bibata-cursors
-    vim
-    ifuse
-    altserver-linux
-    discord
-    ripgrep
-    btop
-    ncdu
-    fzf
-    bat
-    docker
-    openssl
-    zlib
-    vial
-    curl
-    xplr
-    kitty
-    rcon-cli
-    firefox
-    swww
-    thonny
-    pywal
-    rofi
-    fastfetch
-    alsa-utils
-    pulsemixer
-    pulseaudio
-    unrar
-    tailscale
-    tree
-    playit
-    (qutebrowser.override { enableWideVine = true; })
-  ];
-   
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
-
-  services.udev.packages = [ pkgs.vial ];
-
-  system.activationScripts.steamDataDir = ''
-    mkdir -p /mnt/data/steam
-    chown ${user}:users /mnt/data/steam
-  '';
-
-  programs.steam.enable = true;
-  programs.gamemode.enable = true;
-  services.usbmuxd.enable = true;
-
-  ##################
-  #   NETWORKING   #
-  ##################
-
-  networking.networkmanager.enable = true;
-  services.power-profiles-daemon.enable = true;
-  programs.mosh.enable = true;
-  services.tailscale.enable = true;
-  networking.firewall.trustedInterfaces = [ "tailscale0" ];
-  networking.enableIPv6 = true;
-
+    environment.systemPackages = with pkgs; [
+      git
+      zed-editor
+      bibata-cursors
+      vim
+      ifuse
+      altserver-linux
+      discord
+      ripgrep
+      tree-sitter
+      lua
+      luarocks
+      antimicrox
+      remote-touchpad
+      wofi
+      rofi
+      usbutils
+      btop
+      ncdu
+      fzf
+      bat
+      docker
+      openssl
+      zlib
+      vial
+      curl
+      xplr
+      kitty
+      rcon-cli
+      firefox
+      swww
+      thonny
+      pywal
+      rofi
+      fastfetch
+      alsa-utils
+      pulsemixer
+      pulseaudio
+      unrar
+      tailscale
+      tree
+      playit
+      # python312Packages.ds4drv
+      (qutebrowser.override { enableWideVine = true; })
+      bluez-tools
+    ];
+     
+    fonts.packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+    ];
+  
+    services.udev.packages = [ pkgs.vial pkgs.game-devices-udev-rules ];
+  
+    system.activationScripts.steamDataDir = ''
+      mkdir -p /mnt/data/steam
+      chown ${user}:users /mnt/data/steam
+    '';
+  
+    programs.steam.enable = true;
+    programs.gamemode.enable = true;
+    services.usbmuxd.enable = true;
+  
+    ##################
+    #   NETWORKING   #
+    ##################
+  
+    networking.networkmanager.enable = true;
+    services.power-profiles-daemon.enable = true;
+    programs.mosh.enable = true;
+    services.tailscale.enable = true;
+    networking.firewall.trustedInterfaces = [ "tailscale0" ];
+    networking.enableIPv6 = true;
+  
     networking.firewall = {
+      enable = true;
+      allowedUDPPorts = [ 19132 41631 25565 443 8080 ]; 
+      allowedTCPPorts = [ 25565 25575 22 43634 10600 8123 ];
+    };    
+  
+    ##################
+    #     OTHER      #
+    ##################
+  
+  ### Configure remote desktop ###
+  services.sunshine = {
     enable = true;
-    allowedUDPPorts = [ 19132 41631 25565 443 8080 ]; 
-    allowedTCPPorts = [ 25565 25575 22 43634 ];
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
   };
 
-  ##################
-  #     OTHER      #
-  ##################
+  boot.kernelModules = [ "uinput" ];
+
+
+
+
 
   services.tor.enable = true;
   services.tor.client.enable = true;
@@ -276,7 +341,6 @@ in
 
   swapDevices = [ { device = "/swapfile"; size = 8192; } ];
 
-  # Bootloader — enable systemd-boot (EFI). Keep these if your system boots with EFI.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 5;
@@ -284,9 +348,16 @@ in
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
   hardware.keyboard.qmk.enable = true;
+
+  services.upower.enable = true;
   
   services.udev.extraRules = ''
     SUBSYSTEM=="tty", KERNEL=="ttyACM*", MODE="0666", GROUP="dialout"
+
+    # Sunshine rule
+    KERNEL=="uinput", MODE="0660", GROUP="input", SYMLINK+="uinput"
+
+    KERNEL=="uinput", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
   '';
 
   environment.variables = {

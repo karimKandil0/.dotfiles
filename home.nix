@@ -55,6 +55,8 @@ in
     wireshark
     nemo
     nodejs
+    ffmpeg
+    yt-dlp
     w3m
     gcc
     prismlauncher
