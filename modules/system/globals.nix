@@ -1,6 +1,6 @@
 {
   imports = [
-    ./hardware-configuration.nix
+    ../../hardware-configuration.nix
   ];
 
   networking.hostName = "k-nix";
@@ -22,6 +22,10 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   boot.supportedFilesystems = ["ntfs" "ntfs3"];
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
 
   fileSystems."/mnt/data" = {
     device = "/dev/disk/by-uuid/69504f9c-0053-470c-99e6-e2340e672759";

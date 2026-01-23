@@ -45,16 +45,16 @@
   };
 
   systemd.services.playit = {
-  description = "Playit.gg Service";
-  after = [ "network.target" ];
-  wantedBy = [ "multi-user.target" ];
-  serviceConfig = {
-    ExecStart = "/home/karimkandil/.dotfiles/playit";
-    Restart = "always";
-    User = "karimkandil"; # Use your actual NixOS username
-    WorkingDirectory = "/home/karimkandil";
+    description = "Playit.gg Service";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "/home/karimkandil/playit";
+      Restart = "always";
+      User = "karimkandil"; # Use your actual NixOS username
+      WorkingDirectory = "/home/karimkandil";
+    };
   };
-};
   services.home-assistant = {
     enable = true;
     extraPackages = python3Packages: with python3Packages;

@@ -1,8 +1,5 @@
 { config, pkgs, lib, zen-browser, ... }:
 
-let
-  myZen = zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
-in
 {
   imports = [
     ./modules/home/aliases.nix

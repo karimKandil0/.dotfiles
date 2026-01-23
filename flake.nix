@@ -18,6 +18,7 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      myZen = zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
     in
     {
       nixosConfigurations.k-nix = nixpkgs.lib.nixosSystem {
@@ -25,7 +26,7 @@
         modules = [
           ./configuration.nix
           {
-            home-manager.extraSpecialArgs = { inherit zen-browser pkgs; };
+            home-manager.extraSpecialArgs = { inherit zen-browser pkgs myZen; };
             home-manager.users.karimkandil = ./home.nix;
           }
           home-manager.nixosModules.home-manager

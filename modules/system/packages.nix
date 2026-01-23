@@ -37,7 +37,7 @@
       alsa-utils
       pulsemixer
       pulseaudio
-unrar
+      unrar
       tailscale
       tree
       bluez-tools
