@@ -46,8 +46,20 @@
         modules = [
           ./configuration.nix
           {
-            home-manager.extraSpecialArgs = { inherit zen-browser pkgs myZen; };
-            home-manager.users.karimkandil = ./home.nix;
+            home-manager.extraSpecialArgs = {
+              inherit
+                zen-browser
+                pkgs
+                myZen
+                openclaw
+                ;
+            };
+            home-manager.users.karimkandil = {
+              imports = [
+                ./home.nix
+                openclaw.homeManagerModules.default
+              ];
+            };
             programs.mango.enable = true;
           }
           mango.nixosModules.mango

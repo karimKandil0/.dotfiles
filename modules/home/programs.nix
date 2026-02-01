@@ -1,4 +1,5 @@
-{ pkgs, myZen, ... }: {
+{ pkgs, myZen, ... }:
+{
   nixpkgs.config = {
     allowUnfree = true;
   };
@@ -23,4 +24,16 @@
     prismlauncher
     jdk17
   ];
+
+  programs.openclaw = {
+    enable = true;
+    settings = {
+      provider = "ollama";
+      ollama = {
+        baseUrl = "http://127.0.0.1:11434";
+        model = "llama3.1:8b";
+      };
+    };
+  };
+
 }
