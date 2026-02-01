@@ -12,6 +12,7 @@
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "weekly" ];
   virtualisation.docker.enable = true;
+  programs.hyprland.enable = true;
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.experimental-features = [

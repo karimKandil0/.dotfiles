@@ -18,8 +18,7 @@ fi
 # Create history file if it doesn't exist
 touch "$HISTORY_FILE"
 
-# Infinite loop: shuffle wallpaper and update wal
-while true; do
+change_wallpaper() {
     # Get all wallpapers
     ALL_WALLPAPERS=($(find "$WALL_DIR" -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \)))
 
@@ -48,8 +47,7 @@ while true; do
     IMG="${UNUSED_WALLPAPERS[RANDOM % ${#UNUSED_WALLPAPERS[@]}]}"
 
     # Set wallpaper with swww (you can tweak transition options)
-    swww img "$IMG" --outputs "DVI-D-1" --transition-type fade --transition-duration 1
-    swww img "$IMG" --outputs "HDMI-A-1" --transition-type fade --transition-duration 1
+    swww img "$IMG" --outputs "DVI-D-1,HDMI-A-1,DP-1" --transition-type fade --transition-duration 1 
 
     # Generate colorscheme with wal based on the current wallpaper
     wal -i "$IMG"
@@ -64,8 +62,16 @@ while true; do
 
     # Add the new wallpaper to the history
     echo "$IMG" >> "$HISTORY_FILE"
+}
 
+if [[ "$1" == "--force" ]]; then
+    change_wallpaper
+    exit 0
+fi
+
+# Infinite loop: shuffle wallpaper and update wal
+while true; do
+    change_wallpaper
     # Wait before next wallpaper
     sleep "$INTERVAL"
 done
-

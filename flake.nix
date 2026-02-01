@@ -1,5 +1,5 @@
 {
-  description = "Minimal NixOS + Home Manager flake with Hyprland and zen-browser";
+  description = "Main Flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-25.11";
@@ -12,9 +12,29 @@
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
     };
+
+    mango = {
+      url = "github:DreamMaoMao/mango";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    openclaw = {
+      url = "github:openclaw/openclaw";
+    };
+
   };
 
-  outputs = { self, nixpkgs, home-manager, zen-browser, ... }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      playit-nixos-module,
+      zen-browser,
+      mango,
+      openclaw,
+      ...
+    }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -28,10 +48,14 @@
           {
             home-manager.extraSpecialArgs = { inherit zen-browser pkgs myZen; };
             home-manager.users.karimkandil = ./home.nix;
+            programs.mango.enable = true;
           }
+          mango.nixosModules.mango
+          playit-nixos-module.nixosModules.default
           home-manager.nixosModules.home-manager
         ];
         specialArgs = { inherit zen-browser; };
+
       };
     };
 }
