@@ -18,9 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    openclaw = {
-      url = "github:openclaw/openclaw";
-    };
+    playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
 
   };
 
@@ -32,7 +30,6 @@
       playit-nixos-module,
       zen-browser,
       mango,
-      openclaw,
       ...
     }:
     let
@@ -46,20 +43,8 @@
         modules = [
           ./configuration.nix
           {
-            home-manager.extraSpecialArgs = {
-              inherit
-                zen-browser
-                pkgs
-                myZen
-                openclaw
-                ;
-            };
-            home-manager.users.karimkandil = {
-              imports = [
-                ./home.nix
-                openclaw.homeManagerModules.default
-              ];
-            };
+            home-manager.extraSpecialArgs = { inherit zen-browser pkgs myZen; };
+            home-manager.users.karimkandil = ./home.nix;
             programs.mango.enable = true;
           }
           mango.nixosModules.mango
