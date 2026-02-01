@@ -1,4 +1,8 @@
-{ pkgs, myZen, ... }:
+{
+  pkgs,
+  myZen,
+  ...
+}:
 {
   nixpkgs.config = {
     allowUnfree = true;
