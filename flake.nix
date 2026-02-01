@@ -18,8 +18,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
-
   };
 
   outputs =
@@ -27,7 +25,6 @@
       self,
       nixpkgs,
       home-manager,
-      playit-nixos-module,
       zen-browser,
       mango,
       ...
@@ -48,7 +45,6 @@
             programs.mango.enable = true;
           }
           mango.nixosModules.mango
-          playit-nixos-module.nixosModules.default
           home-manager.nixosModules.home-manager
         ];
         specialArgs = { inherit zen-browser; };

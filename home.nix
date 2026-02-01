@@ -1,4 +1,10 @@
-{ config, pkgs, lib, zen-browser, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  zen-browser,
+  ...
+}:
 
 {
   imports = [
