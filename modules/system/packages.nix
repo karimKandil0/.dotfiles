@@ -6,10 +6,10 @@
       git
       zed-editor
       bibata-cursors
+      usb-modeswitch
       nodejs_22
       ffmpeg-full
       chromium
-
       foot
       age
       libdrm

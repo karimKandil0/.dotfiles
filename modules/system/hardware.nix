@@ -1,10 +1,20 @@
 { config, pkgs, ... }: {
+
   hardware.uinput.enable = true;
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
   };
+
   services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+  
+  services.blueman.enable = true;
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -22,8 +32,11 @@
   boot.extraModprobeConfig = ''
     options snd-hda-intel model=alc221-hp-mic
   '';
+
   hardware.keyboard.qmk.enable = true;
+
   boot.kernelModules = [ "uinput" ];
+
   services.udev.extraRules = ''
     SUBSYSTEM=="tty", KERNEL=="ttyACM*", MODE="0666", GROUP="dialout"
 
@@ -32,4 +45,5 @@
 
     KERNEL=="uinput", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
   '';
+
 }

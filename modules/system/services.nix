@@ -74,7 +74,6 @@
   services.ollama = {
     enable = true;
     acceleration = "cuda";
-    loadModels = [ "llama3.1:8b" ];
     package = pkgs.ollama.override {
       cudaArches = [ "61" ];
     };

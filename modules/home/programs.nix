@@ -10,6 +10,7 @@
 
   home.packages = with pkgs; [
     myZen
+    youtube-tui
     dmidecode
     cmatrix
     gemini-cli
