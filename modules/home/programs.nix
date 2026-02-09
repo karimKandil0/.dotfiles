@@ -4,6 +4,7 @@
   ...
 }:
 {
+
   nixpkgs.config = {
     allowUnfree = true;
   };
@@ -11,6 +12,7 @@
   home.packages = with pkgs; [
     myZen
     youtube-tui
+    vlc
     dmidecode
     cmatrix
     gemini-cli

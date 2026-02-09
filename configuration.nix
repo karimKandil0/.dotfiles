@@ -5,6 +5,7 @@
     ./modules/system/packages.nix
     ./modules/system/services.nix
     ./modules/system/users.nix
+    ./modules/system/playit.nix
   ];
 
 }

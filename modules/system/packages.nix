@@ -4,6 +4,7 @@
 
   environment.systemPackages = with pkgs; [
       git
+      unzip
       zed-editor
       bibata-cursors
       usb-modeswitch
