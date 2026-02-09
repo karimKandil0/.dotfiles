@@ -1,8 +1,7 @@
-{ pkgs, lib, inputs, ... }: # Use 'inputs' here
+{ pkgs, lib, inputs, ... }:
 
 let
-  # Adjust "x86_64-linux" to "aarch64-linux" if you are on ARM/Apple Silicon
-  playit-bin = inputs.playit.packages."x86_64-linux".default;
+  playit-pkg = inputs.playit.packages."x86_64-linux".default;
 in
 {
   services.playit = {
@@ -10,9 +9,12 @@ in
     secretPath = "/var/lib/playit/secret.toml";
   };
 
-  systemd.services.playit.serviceConfig = {
-    StateDirectory = "playit";
-    ReadWritePaths = [ "/var/lib/playit" ];
-    ExecStart = lib.mkForce "${playit-bin}/bin/playit --secret-path /var/lib/playit/secret.toml start";
+  systemd.services.playit.serviceConfig = lib.mkForce {
+    Type = "simple";
+    Restart = "always";
+    StateDirectory = "playit"; 
+    # Change --secret-path to --secret_path
+    ExecStart = "${lib.getExe playit-pkg} --secret_path /var/lib/playit/secret.toml start";
+    User = "root"; 
   };
 }
