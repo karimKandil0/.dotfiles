@@ -3,6 +3,7 @@
   pkgs,
   lib,
   zen-browser,
+  inputs,
   ...
 }:
 
@@ -12,11 +13,17 @@
     ./modules/home/git.nix
     ./modules/home/programs.nix
     ./modules/home/xdg.nix
-    ./modules/home/openclaw.nix
+    inputs.openclaw.homeManagerModules.openclaw
   ];
 
   # General #
   home.username = "karimkandil";
   home.homeDirectory = "/home/karimkandil";
   home.stateVersion = "25.11";
+
+  programs.openclaw = {
+    enable = true;
+    documents = ./Darlene;
+
+  };
 }

@@ -52,7 +52,6 @@
             home-manager.users.karimkandil = {
               imports = [
                 ./home.nix
-                ./openclaw.nix
               ];
             };
 
