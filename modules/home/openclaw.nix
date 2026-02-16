@@ -3,7 +3,7 @@
 {
 
   imports = [
-    inputs.openclaw.homeManagerModules.default
+    inputs.openclaw.homeManagerModules.openclaw
   ];
 
   programs.openclaw = {

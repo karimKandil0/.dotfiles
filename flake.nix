@@ -46,10 +46,15 @@
             home-manager.useGlobalPkgs = true;
 
             home-manager.extraSpecialArgs = {
-              inherit myZen;
+              inherit inputs myZen;
             };
 
-            home-manager.users.karimkandil = ./home.nix;
+            home-manager.users.karimkandil = {
+              imports = [
+                ./home.nix
+                ./openclaw.nix
+              ];
+            };
 
           }
           home-manager.nixosModules.home-manager
