@@ -15,6 +15,8 @@
 
     playit.url = "github:pedorich-n/playit-nixos-module";
 
+    openclaw.url = "github:openclaw/nix-openclaw";
+
   };
 
   outputs =

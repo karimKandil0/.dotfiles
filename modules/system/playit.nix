@@ -10,11 +10,14 @@ in
   };
 
   systemd.services.playit.serviceConfig = lib.mkForce {
-    Type = "simple";
-    Restart = "always";
-    StateDirectory = "playit"; 
-    # Change --secret-path to --secret_path
-    ExecStart = "${lib.getExe playit-pkg} --secret_path /var/lib/playit/secret.toml start";
-    User = "root"; 
+  # Start a detached tmux session and run the command
+  ExecStart = "${pkgs.tmux}/bin/tmux new-session -d -s playit-tunnel '/run/current-system/sw/bin/playit-cli --secret_path /var/lib/playit/secret.toml start'";
+  
+  # Tell systemd to kill the whole tmux session when stopping
+  ExecStop = "${pkgs.tmux}/bin/tmux kill-session -t playit-tunnel";
+  
+  Type = "forking"; # Crucial for tmux
+  User = "root";
+  Restart = "always";
   };
 }

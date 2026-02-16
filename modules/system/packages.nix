@@ -4,6 +4,8 @@
 
   environment.systemPackages = with pkgs; [
       git
+      zip
+      tmux
       unzip
       zed-editor
       bibata-cursors

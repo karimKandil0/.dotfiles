@@ -47,6 +47,7 @@
           enforce-secure-profile = false;
           enable-rcon = true;
           "rcon.password" = "karimkandil1324";
+          "rcon.port" = 25576;
           level-seed = "-1110700258100175300";
         };
 
@@ -61,9 +62,19 @@
           server-port = 25566;
           online-mode = false;
           motd = "za'azee' modded";
+          gamemode = "survival";
+          difficulty = "normal";
+          view-distance = 6;
+          simulation-distance = 4;
+          enforce-secure-profile = false;
+          enable-rcon = true;
+          "rcon.password" = "karimkandil132465";
+          resource-pack = "https://download.mc-packs.net/pack/1424153303a5100ae91c04c90a29cc301d3b96a1.zip";
+          resource-pack-sha1 = "1424153303a5100ae91c04c90a29cc301d3b96a1";
+          require-resource-pack = true;
         };
 
-        jvmOpts = "-Xmx6G -Xms4G";
+        jvmOpts = "-Xmx8G -Xms4G";
       };
     };
 
