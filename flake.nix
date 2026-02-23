@@ -43,6 +43,10 @@
           playit.nixosModules.default
           {
 
+            nixpkgs.overlays = [
+              inputs.openclaw.overlays.default
+            ];
+
             home-manager.useGlobalPkgs = true;
 
             home-manager.extraSpecialArgs = {

@@ -1,33 +1,14 @@
 { config, pkgs, ... }: {
   xdg.configFile."nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/nvim";
+    source = ../../config/nvim;
     recursive = true;
   };
 
   xdg.configFile."hypr" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/hypr";
+    source = ../../config/hypr;
     recursive = true;
   };
 
-  xdg.configFile."qutebrowser/config.py" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/qutebrowser/config.py";
-    recursive = true;
-  };
-
-  programs.waybar = {
-    enable = true;
-  };
-
-  xdg.configFile."waybar" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/waybar";
-    recursive = true;
-  };
-
-  xdg.configFile."mango" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/home/karimkandil/.dotfiles/config/mango";
-    recursive = true;
-  };
- 
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";
     package = pkgs.bibata-cursors;

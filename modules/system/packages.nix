@@ -3,6 +3,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+      codex
       git
       zip
       tmux

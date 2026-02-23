@@ -13,7 +13,6 @@
     ./modules/home/git.nix
     ./modules/home/programs.nix
     ./modules/home/xdg.nix
-    inputs.openclaw.homeManagerModules.openclaw
   ];
 
   # General #
@@ -21,9 +20,4 @@
   home.homeDirectory = "/home/karimkandil";
   home.stateVersion = "25.11";
 
-  programs.openclaw = {
-    enable = true;
-    documents = ./Darlene;
-
-  };
 }

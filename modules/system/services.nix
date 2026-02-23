@@ -18,7 +18,7 @@
     servers = {
 
       za2azee2-smp = {
-        enable = true;
+        enable = false;
 
         package = pkgs.papermc.overrideAttrs (
           finalAttrs: previousAttrs: rec {
@@ -145,6 +145,12 @@
   services.gnome.gnome-keyring.enable = true;
   services.dbus.enable = true;
   security.rtkit.enable = true;
+  services.xserver.windowManager.dwm = {
+    enable = true;
+    package = pkgs.dwm.overrideAttrs {
+      src = ../../config/dwm;
+    };
+  };
 
   services.pipewire = {
     enable = true;
