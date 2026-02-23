@@ -9,6 +9,11 @@
     recursive = true;
   };
 
+  xdg.configFile."qtile" = {
+    source = ../../config/qtile;
+    recursive = true;
+  };
+
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";
     package = pkgs.bibata-cursors;

@@ -16,6 +16,7 @@
     dmidecode
     cmatrix
     gemini-cli
+    cava
     kitty
     neovim
     nil
