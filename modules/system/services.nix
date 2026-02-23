@@ -116,6 +116,9 @@
     enable = true;
     autoRepeatDelay = 200;
     autoRepeatInterval = 35;
+    windowManager.awesome = {
+      enable = true;
+    };
   };
   services.displayManager.ly = {
     enable = true;
@@ -145,7 +148,6 @@
   services.gnome.gnome-keyring.enable = true;
   services.dbus.enable = true;
   security.rtkit.enable = true;
-  services.xserver.windowManager.qtile.enable = true;
 
   services.pipewire = {
     enable = true;

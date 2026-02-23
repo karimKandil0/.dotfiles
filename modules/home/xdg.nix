@@ -9,8 +9,8 @@
     recursive = true;
   };
 
-  xdg.configFile."qtile" = {
-    source = ../../config/qtile;
+  xdg.configFile."awesome" = {
+    source = ../../config/awesome;
     recursive = true;
   };
 
