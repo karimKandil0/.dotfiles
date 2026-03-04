@@ -11,8 +11,6 @@
 
   home.packages = with pkgs; [
     myZen
-    youtube-tui
-    vlc
     dmidecode
     cmatrix
     gemini-cli
@@ -31,6 +29,25 @@
     gcc
     prismlauncher
     jdk17
+    # ESP TOOLS
+    cmake
+    ninja
+    git
+    python3
+    python3Packages.pip
+    python3Packages.virtualenv
+    gnumake
+    flex
+    bison
+    gperf
+    ccache
+    dfu-util
+    libusb1
+    python3Packages.pyserial
+    ncurses
+    pkg-config
+    esptool
+    cargo-espmonitor
   ];
 
 }

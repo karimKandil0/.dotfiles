@@ -80,32 +80,8 @@
 
   };
 
-    services.home-assistant = {
-      enable = true;
-      extraPackages =
-      python3Packages: with python3Packages; [
-        gtts
-      ];
-    extraComponents = [
-      "default_config"
-      "tuya"
-    ];
-
-    config = {
-      default_config = { };
-      http = {
-        server_port = 8123;
-        trusted_proxies = [
-          "127.0.0.1"
-          "::1"
-        ];
-        use_x_forwarded_for = true;
-      };
-    };
-  };
-
   services.ollama = {
-    enable = true;
+    enable = false;
     acceleration = "cuda";
     package = pkgs.ollama.override {
       cudaArches = [ "61" ];
@@ -116,10 +92,8 @@
     enable = true;
     autoRepeatDelay = 200;
     autoRepeatInterval = 35;
-    windowManager.awesome = {
-      enable = true;
-    };
   };
+
   services.displayManager.ly = {
     enable = true;
     settings = {
@@ -148,6 +122,7 @@
   services.gnome.gnome-keyring.enable = true;
   services.dbus.enable = true;
   security.rtkit.enable = true;
+  services.usbmuxd.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -157,14 +132,14 @@
   };
 
   services.sunshine = {
-    enable = true;
+    enable = false;
     autoStart = true;
     capSysAdmin = true;
     openFirewall = true;
   };
 
-  services.tor.enable = true;
-  services.tor.client.enable = true;
+  services.tor.enable = false;
+  services.tor.client.enable = false;
   services.openssh.enable = true;
   services.upower.enable = true;
   networking.networkmanager.enable = true;
@@ -174,8 +149,8 @@
   services.tailscale.enable = true;
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
   networking.enableIPv6 = true;
-
   networking.firewall = {
+
     enable = true;
 
     allowedUDPPorts = [
@@ -197,5 +172,6 @@
       10600
       8123
     ];
+
   };
 }

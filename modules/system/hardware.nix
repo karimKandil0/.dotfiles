@@ -1,6 +1,13 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
 
   hardware.uinput.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+
+  powerManagement.cpuFreqGovernor = "performance";
+  zramSwap.enable = true;
+  zramSwap.algorithm = "zstd";
+  zramSwap.memoryPercent = 20;
 
   hardware.graphics = {
     enable = true;
@@ -9,25 +16,27 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
-  
-  services.blueman.enable = true;
-
   hardware.nvidia = {
     modesetting.enable = true;
 
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
 
     powerManagement.enable = true;
     powerManagement.finegrained = false;
   };
 
-  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
+  environment.sessionVariables = {
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    LIBVA_DRIVER_NAME = "nvidia";
+  };
+
+  boot.kernelParams = [
+    "nvidia-drm.modeset=1"
+    "intel_pstate=active"
+  ];
 
   boot.extraModprobeConfig = ''
     options snd-hda-intel model=alc221-hp-mic

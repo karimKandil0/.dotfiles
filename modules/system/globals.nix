@@ -1,4 +1,6 @@
+{ config, pkgs, ... }:
 {
+
   imports = [
     ../../hardware-configuration.nix
   ];
@@ -11,7 +13,12 @@
   documentation.enable = false;
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "weekly" ];
-  virtualisation.docker.enable = true;
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    libusb1
+  ];
+
   programs.hyprland.enable = true;
 
   nixpkgs.config.allowUnfree = true;
@@ -20,13 +27,18 @@
     "flakes"
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
-  boot.supportedFilesystems = ["ntfs" "ntfs3"];
+  boot.supportedFilesystems = [
+    "ntfs"
+    "ntfs3"
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
 
   fileSystems."/mnt/data" = {
     device = "/dev/disk/by-uuid/69504f9c-0053-470c-99e6-e2340e672759";

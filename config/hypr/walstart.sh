@@ -47,7 +47,7 @@ change_wallpaper() {
     IMG="${UNUSED_WALLPAPERS[RANDOM % ${#UNUSED_WALLPAPERS[@]}]}"
 
     # Set wallpaper with swww (you can tweak transition options)
-    swww img "$IMG" --outputs "DVI-D-1,HDMI-A-1,DP-1" --transition-type fade --transition-duration 1 
+    swww img "$IMG" --outputs "HDMI-A-1,DP-1" --transition-type fade --transition-duration 1 
 
     # Generate colorscheme with wal based on the current wallpaper
     wal -i "$IMG"
