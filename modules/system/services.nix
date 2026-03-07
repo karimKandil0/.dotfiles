@@ -7,9 +7,11 @@
 }:
 {
 
+  # Module imports & overlays
   imports = [ inputs.nix-minecraft.nixosModules.minecraft-servers ];
   nixpkgs.overlays = [ inputs.nix-minecraft.overlay ];
 
+  # Minecraft servers
   services.minecraft-servers = {
     enable = true;
     eula = true;
@@ -80,6 +82,7 @@
 
   };
 
+  # Desktop & local AI helpers
   services.ollama = {
     enable = false;
     acceleration = "cuda";
@@ -107,6 +110,7 @@
   services.udisks2.enable = true;
   security.polkit.enable = true;
 
+  # Portals & session services
   xdg.portal = {
     enable = true;
     extraPortals = [
@@ -124,6 +128,17 @@
   security.rtkit.enable = true;
   services.usbmuxd.enable = true;
 
+  # Self-hosted apps
+  services.vaultwarden = {
+    enable = true;
+      config = {
+        DOMAIN = "https://k-nix.taila13585.ts.net";
+        ROCKET_ADDRESS = "127.0.0.1";
+        ROCKET_PORT = 8222;
+        SIGNUPS_ALLOWED = true;
+      };
+  };
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -131,13 +146,91 @@
     pulse.enable = true;
   };
 
-  services.sunshine = {
-    enable = false;
-    autoStart = true;
-    capSysAdmin = true;
-    openFirewall = true;
+  services.immich = {
+    enable = true;
+    port = 2283;
+    host = "127.0.0.1";
+    mediaLocation = "/mnt/data/immich";
+  };
+  systemd.services.immich-server.after = [ "mnt-data-immich.mount" ];
+  systemd.services.immich-server.requires = [ "mnt-data-immich.mount" ];
+  fileSystems."/mnt/data/immich" = {
+    device = "/dev/disk/by-uuid/69504f9c-0053-470c-99e6-e2340e672759";
+    fsType = "ext4";
+    options = [ "defaults" "nofail" ];
   };
 
+  # Reverse proxy hosts
+  services.caddy = {
+    enable = true;
+    virtualHosts = {
+      "k-nix.taila13585.ts.net" = {
+        extraConfig = "reverse_proxy localhost:8222"; # Vaultwarden
+      };
+      # Add http:// prefix to disable automatic TLS redirection/handshake
+      "http://k-nix.taila13585.ts.net:444" = {
+        extraConfig = "reverse_proxy localhost:2283"; # Immich
+      };
+      "http://k-nix.taila13585.ts.net:445" = {
+        extraConfig = "reverse_proxy localhost:8096"; # Jellyfin
+      };
+      "http://k-nix.taila13585.ts.net:446" = {
+        extraConfig = "reverse_proxy localhost:5055"; # Jellyseerr
+      };
+    };
+  };
+
+  # Jellyfin/Media 
+  services.jellyfin = {
+    enable = true;
+  };
+
+  services.jellyseerr = {
+    enable = true;
+  };
+
+  services.sonarr.enable = true;
+  services.radarr.enable = true;
+  services.prowlarr.enable = true;
+
+  services.transmission = {
+    enable = true;
+    settings = {
+      download-dir = "/mnt/data/media/downloads";
+      rpc-bind-address = "127.0.0.1";
+      rpc-whitelist-enabled = false;
+      umask = 2;
+      incomplete-dir = "/mnt/data/media/downloads/.incomplete";
+      incomplete-dir-enabled = true;
+    };
+  };
+
+  # Permissions for Jellyfin+Arr stack
+  users.groups.media = { };
+  users.users.sonarr.extraGroups = [ "media" ];
+  users.users.radarr.extraGroups = [ "media" ];
+  users.users.jellyfin.extraGroups = [ "media" ];
+  users.users.transmission.extraGroups = [ "media" ];
+  users.users.karimkandil.extraGroups = [ "media" ];
+  users.groups.media.members = [ "karimkandil" "sonarr" "radarr" "jellyfin" "transmission" ];
+
+  # Sonarr Permissions
+  systemd.services.sonarr.serviceConfig = {
+    ReadWritePaths = [ "/mnt/data/media" ];
+    ProtectMounts = false;
+    BindPaths = [ "/mnt/data/media" ];
+  };
+
+  # Radarr Permissions
+  systemd.services.radarr.serviceConfig = {
+    ReadWritePaths = [ "/mnt/data/media" ];
+    ProtectMounts = false;
+    BindPaths = [ "/mnt/data/media" ];
+  };
+
+  # System & hardware daemons
+  systemd.services.caddy.serviceConfig.AmbientCapabilities = "CAP_NET_BIND_SERVICE";
+  systemd.services.tailscaled.serviceConfig.Environment = [ "TS_PERMIT_CERT_UID=caddy" ];
   services.tor.enable = false;
   services.tor.client.enable = false;
   services.openssh.enable = true;
@@ -145,6 +238,7 @@
   networking.networkmanager.enable = true;
   services.power-profiles-daemon.enable = true;
 
+  # Connectivity tooling
   programs.mosh.enable = true;
   services.tailscale.enable = true;
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
@@ -153,24 +247,34 @@
 
     enable = true;
 
+    # UDP ports required for game servers and QUIC-capable endpoints
     allowedUDPPorts = [
-      19132
-      41631
+      # Minecraft Ports
       25565
       25566
+      # Web
       443
-      8080
+      # Transmission
+      51413
     ];
 
+    # TCP ports required by exposed services
     allowedTCPPorts = [
+      # Minecraftt
       25565
       25566
-      18789
-      25575
+      #Web
+      80
+      8222
+      443
+      444
+      445
+      446
+      2283
+      # SSH
       22
-      43634
-      10600
-      8123
+      # Transmission
+      51413
     ];
 
   };

@@ -6,6 +6,8 @@
       dots = "nvim ~/.dotfiles";
       conf = "nvim ~/.dotfiles/config";
       darlene = "~/Darlene/Darlene.sh";
+      services = "nvim ~/.dotfiles/modules/system/services.nix";
     };
   };
+
 }

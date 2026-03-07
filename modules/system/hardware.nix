@@ -2,7 +2,7 @@
 {
 
   hardware.uinput.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
   powerManagement.cpuFreqGovernor = "performance";
   zramSwap.enable = true;
@@ -21,7 +21,7 @@
 
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
 
     powerManagement.enable = true;
     powerManagement.finegrained = false;

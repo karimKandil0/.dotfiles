@@ -13,18 +13,14 @@
     myZen
     dmidecode
     cmatrix
-    gemini-cli
     cava
     kitty
     neovim
     nil
-    tor-browser
     nixpkgs-fmt
-    wireshark
     nemo
     nodejs
     ffmpeg
-    yt-dlp
     w3m
     gcc
     prismlauncher

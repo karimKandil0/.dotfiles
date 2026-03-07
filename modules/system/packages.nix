@@ -11,7 +11,6 @@
     unzip
     zed-editor
     bibata-cursors
-    usb-modeswitch
     nodejs_22
     libdrm
     meson
@@ -31,7 +30,6 @@
     lua
     luarocks
     antimicrox
-    remote-touchpad
     wofi
     rofi
     usbutils
@@ -59,13 +57,8 @@
     tailscale
     tree
     wine
-    winetricks
     lutris
-    bluez-tools
     python3
-    (python3.withPackages (ps: [
-      ps.nbtlib
-    ]))
   ];
 
   fonts.packages = with pkgs; [
