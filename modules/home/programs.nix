@@ -25,6 +25,7 @@
     gcc
     prismlauncher
     jdk17
+    typioca
     # ESP TOOLS
     cmake
     ninja
