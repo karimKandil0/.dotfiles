@@ -32,6 +32,9 @@
     "flakes"
   ];
 
+  sops.defaultSopsFile = ../../secrets/rcon.yaml;
+  sops.secrets.rcon_password = { };
+
   boot.supportedFilesystems = [
     "ntfs"
     "ntfs3"

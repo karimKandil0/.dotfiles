@@ -48,7 +48,7 @@
           online-mode = false;
           enforce-secure-profile = false;
           enable-rcon = true;
-          "rcon.password" = "karimkandil1324";
+          "rcon.password" = builtins.readFile config.sops.secrets.rcon_password.path;
           "rcon.port" = 25576;
           level-seed = "-1110700258100175300";
         };

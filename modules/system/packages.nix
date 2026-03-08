@@ -8,6 +8,8 @@
     git
     zip
     tmux
+    sops
+    age
     unzip
     zed-editor
     bibata-cursors

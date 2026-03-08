@@ -15,7 +15,7 @@
 
     playit.url = "github:pedorich-n/playit-nixos-module";
 
-    openclaw.url = "github:openclaw/nix-openclaw";
+    sops-nix.url = "github:Mic92/sops-nix";
 
   };
 
@@ -41,11 +41,8 @@
         modules = [
           ./configuration.nix
           playit.nixosModules.default
+          inputs.sops-nix.nixosModules.sops
           {
-
-            nixpkgs.overlays = [
-              inputs.openclaw.overlays.default
-            ];
 
             home-manager.useGlobalPkgs = true;
 
