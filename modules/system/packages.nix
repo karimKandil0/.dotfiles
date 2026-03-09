@@ -5,6 +5,7 @@
 
   environment.systemPackages = with pkgs; [
     codex
+    go
     git
     dig
     zip
