@@ -34,6 +34,7 @@
 
   sops.defaultSopsFile = ../../secrets/rcon.yaml;
   sops.secrets.rcon_password = { };
+  sops.age.keyFile = "/home/karimkandil/.config/sops/age/keys.txt";
 
   boot.supportedFilesystems = [
     "ntfs"
