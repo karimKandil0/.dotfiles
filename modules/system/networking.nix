@@ -40,10 +40,11 @@
       
       # Huge cache for instant second-time loads
       cache-size = 10000;
+      no-resolv = true;
       
       # Speed tweaks
       no-negcache = true; # Don't remember "Site not found" errors
-      dns-forward-max = 150;
+      dns-forward-max = 300;
     };
   };
 }
