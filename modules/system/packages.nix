@@ -6,6 +6,7 @@
   environment.systemPackages = with pkgs; [
     codex
     git
+    dig
     zip
     tmux
     sops

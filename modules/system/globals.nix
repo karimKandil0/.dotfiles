@@ -34,7 +34,6 @@
 
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
   sops.secrets.rcon_password = { };
-  sops.secrets.mysshkey = { };
   sops.age.keyFile = "/home/karimkandil/.config/sops/age/keys.txt";
 
   boot.supportedFilesystems = [
