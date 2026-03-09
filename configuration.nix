@@ -2,7 +2,6 @@
   imports = [
     ./modules/system/globals.nix
     ./modules/system/hardware.nix
-    ./modules/system/networking.nix
     ./modules/system/packages.nix
     ./modules/system/services.nix
     ./modules/system/users.nix
