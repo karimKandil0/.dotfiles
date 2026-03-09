@@ -19,9 +19,6 @@
 
   networking = {
     hostName = "k-nix";
-    # Use DHCP normally so you don't fight the router
-    useDHCP = true; 
-    
     # Force your PC to look at itself for DNS first
     nameservers = [ "127.0.0.1" ];
 
