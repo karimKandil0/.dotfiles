@@ -20,7 +20,7 @@
     servers = {
 
       za2azee2-smp = {
-        enable = true;
+        enable = false;
 
         package = pkgs.papermc.overrideAttrs (
           finalAttrs: previousAttrs: rec {
