@@ -20,7 +20,7 @@
     servers = {
 
       za2azee2-smp = {
-        enable = false;
+        enable = true;
 
         package = pkgs.papermc.overrideAttrs (
           finalAttrs: previousAttrs: rec {
@@ -48,7 +48,7 @@
           online-mode = false;
           enforce-secure-profile = false;
           enable-rcon = true;
-          "rcon.password" = builtins.readFile config.sops.secrets.rcon_password.path;
+          "rcon.password" = config.sops.secrets.rcon_password.path;
           "rcon.port" = 25576;
           level-seed = "-1110700258100175300";
         };
@@ -58,7 +58,7 @@
 
       za2azee2-fabric = {
         enable = true;
-        package = pkgs.fabricServers.fabric-1_21_11;
+        package = pkgs.fabricServers.fabric;
 
         serverProperties = {
           server-port = 25566;
@@ -70,7 +70,7 @@
           simulation-distance = 4;
           enforce-secure-profile = false;
           enable-rcon = true;
-          "rcon.password" = "karimkandil132465";
+          "rcon.password" = config.sops.secrets.rcon_password.path;
           resource-pack = "https://download.mc-packs.net/pack/1424153303a5100ae91c04c90a29cc301d3b96a1.zip";
           resource-pack-sha1 = "1424153303a5100ae91c04c90a29cc301d3b96a1";
           require-resource-pack = true;
@@ -171,61 +171,7 @@
       "http://k-nix.taila13585.ts.net:444" = {
         extraConfig = "reverse_proxy localhost:2283"; # Immich
       };
-      "http://k-nix.taila13585.ts.net:445" = {
-        extraConfig = "reverse_proxy localhost:8096"; # Jellyfin
-      };
-      "http://k-nix.taila13585.ts.net:446" = {
-        extraConfig = "reverse_proxy localhost:5055"; # Jellyseerr
-      };
     };
-  };
-
-  # Jellyfin/Media 
-  services.jellyfin = {
-    enable = true;
-  };
-
-  services.jellyseerr = {
-    enable = true;
-  };
-
-  services.sonarr.enable = true;
-  services.radarr.enable = true;
-  services.prowlarr.enable = true;
-
-  services.transmission = {
-    enable = true;
-    settings = {
-      download-dir = "/mnt/data/media/downloads";
-      rpc-bind-address = "127.0.0.1";
-      rpc-whitelist-enabled = false;
-      umask = 2;
-      incomplete-dir = "/mnt/data/media/downloads/.incomplete";
-      incomplete-dir-enabled = true;
-    };
-  };
-
-  # Permissions for Jellyfin+Arr stack
-  users.groups.media = { };
-  users.users.sonarr.extraGroups = [ "media" ];
-  users.users.radarr.extraGroups = [ "media" ];
-  users.users.jellyfin.extraGroups = [ "media" ];
-  users.users.transmission.extraGroups = [ "media" ];
-  users.users.karimkandil.extraGroups = [ "media" ];
-  users.groups.media.members = [ "karimkandil" "sonarr" "radarr" "jellyfin" "transmission" ];
-
-  # Sonarr Permissions
-  systemd.services.sonarr.serviceConfig = {
-    ReadWritePaths = [ "/mnt/data/media" ];
-    ProtectMounts = false;
-    BindPaths = [ "/mnt/data/media" ];
-  };
-
-  # Radarr Permissions
-  systemd.services.radarr.serviceConfig = {
-    ReadWritePaths = [ "/mnt/data/media" ];
-    ProtectMounts = false;
-    BindPaths = [ "/mnt/data/media" ];
   };
 
   # System & hardware daemons

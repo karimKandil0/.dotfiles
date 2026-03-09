@@ -1,5 +1,8 @@
+keys:
+  - &karim age148fwvekxx6r2ugjssmgwjnwe807643q2jhljcjwdmhuc6fwc64cqvc53yh
+
 creation_rules:
   - path_regex: secrets/.*\.yaml$
     key_groups:
       - age:
-          - age148fwvekxx6r2ugjssmgwjnwe807643q2jhljcjwdmhuc6fwc64cqvc53yh
+          - *karim
