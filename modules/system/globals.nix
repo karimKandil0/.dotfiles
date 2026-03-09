@@ -11,8 +11,12 @@
 
   system.stateVersion = "25.11";
   documentation.enable = false;
-  nix.optimise.automatic = true;
-  nix.optimise.dates = [ "weekly" ];
+  nix.settings.auto-optimise-store = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
