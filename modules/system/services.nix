@@ -200,8 +200,6 @@
       25566
       # Web
       443
-      # Transmission
-      51413
     ];
 
     # TCP ports required by exposed services
@@ -214,13 +212,8 @@
       8222
       443
       444
-      445
-      446
-      2283
       # SSH
       22
-      # Transmission
-      51413
     ];
 
   };
