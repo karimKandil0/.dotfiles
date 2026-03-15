@@ -20,7 +20,7 @@
     servers = {
 
       za2azee2-smp = {
-        enable = false;
+        enable = true;
 
         package = pkgs.papermc.overrideAttrs (
           finalAttrs: previousAttrs: rec {
@@ -57,7 +57,7 @@
       };
 
       za2azee2-fabric = {
-        enable = true;
+        enable = false;
         package = pkgs.fabricServers.fabric;
 
         serverProperties = {
@@ -122,6 +122,10 @@
       "gtk"
     ];
   };
+
+  # Virtualisation
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
   services.gnome.gnome-keyring.enable = true;
   services.dbus.enable = true;

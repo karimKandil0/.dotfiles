@@ -6,9 +6,12 @@
   environment.systemPackages = with pkgs; [
     codex
     go
+    virt-manager
+    qemu
     git
     dig
     zip
+    gettext
     tmux
     sops
     age

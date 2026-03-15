@@ -13,7 +13,6 @@
     myZen
     dmidecode
     cmatrix
-    chatgpt-desktop
     cava
     kitty
     neovim

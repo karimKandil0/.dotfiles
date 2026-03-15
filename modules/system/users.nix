@@ -15,6 +15,7 @@
       "seatd"
       "lp"
       "dialout"
+      "libvirtd"
     ];
   };
 }

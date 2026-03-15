@@ -1,13 +1,13 @@
 { config, pkgs, ... }:
 {
 
-  xdg.configFile."nvim" = {
-    source = ../../config/nvim;
+  xdg.configFile."hypr" = {
+    source = ../../config/hypr;
     recursive = true;
   };
 
-  xdg.configFile."hypr" = {
-    source = ../../config/hypr;
+  xdg.configFile."nvim" = {
+    source = ../../config/nvim;
     recursive = true;
   };
 
