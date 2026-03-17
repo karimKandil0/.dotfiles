@@ -7,6 +7,7 @@
       conf = "nvim ~/.dotfiles/config";
       darlene = "~/Darlene/Darlene.sh";
       services = "nvim ~/.dotfiles/modules/system/services.nix";
+      nx = "nix develop";
       ga = "git add";
       gm = "git commit -m";
       gp = "git push";

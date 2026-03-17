@@ -10,6 +10,7 @@
     qemu
     git
     dig
+    shellcheck
     zip
     gettext
     tmux
@@ -76,6 +77,11 @@
     pkgs.vial
     pkgs.game-devices-udev-rules
   ];
+
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
 
   programs.steam.enable = true;
   programs.gamemode.enable = true;

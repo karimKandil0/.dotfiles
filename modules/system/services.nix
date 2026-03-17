@@ -166,7 +166,7 @@
 
   # Reverse proxy hosts
   services.caddy = {
-    enable = true;
+    enable = false;
     virtualHosts = {
       "k-nix.taila13585.ts.net" = {
         extraConfig = "reverse_proxy localhost:8222"; # Vaultwarden
@@ -203,7 +203,6 @@
       25565
       25566
       # Web
-      443
     ];
 
     # TCP ports required by exposed services
@@ -213,8 +212,6 @@
       25566
       #Web
       8222
-      443
-      444
       # SSH
       22
     ];

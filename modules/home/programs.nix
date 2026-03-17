@@ -13,6 +13,7 @@
     myZen
     dmidecode
     cmatrix
+    hyprshot
     cava
     kitty
     neovim
@@ -46,5 +47,6 @@
     esptool
     cargo-espmonitor
   ];
+
 
 }
