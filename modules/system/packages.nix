@@ -8,7 +8,9 @@
     go
     virt-manager
     qemu
+    feh
     git
+    aria2
     dig
     shellcheck
     zip
@@ -19,7 +21,9 @@
     unzip
     zed-editor
     bibata-cursors
-    nodejs_22
+    nodejs
+    yarn
+    nodePackages.eas-cli
     libdrm
     meson
     ninja

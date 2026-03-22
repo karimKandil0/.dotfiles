@@ -20,7 +20,7 @@
     servers = {
 
       za2azee2-smp = {
-        enable = true;
+        enable = false;
 
         package = pkgs.papermc.overrideAttrs (
           finalAttrs: previousAttrs: rec {
@@ -57,7 +57,7 @@
       };
 
       za2azee2-fabric = {
-        enable = false;
+        enable = true;
         package = pkgs.fabricServers.fabric;
 
         serverProperties = {
@@ -212,6 +212,7 @@
       25566
       #Web
       8222
+      8081
       # SSH
       22
     ];

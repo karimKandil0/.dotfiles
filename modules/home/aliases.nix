@@ -11,6 +11,7 @@
       ga = "git add";
       gm = "git commit -m";
       gp = "git push";
+      dl = "aria2c -d ~/Downloads -x 16 -s 16 -k 1M --file-allocation=none";
     };
   };
 

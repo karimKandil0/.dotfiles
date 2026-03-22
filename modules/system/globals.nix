@@ -8,7 +8,6 @@
   networking.hostName = "k-nix";
   time.timeZone = "Africa/Cairo";
   i18n.defaultLocale = "en_US.UTF-8";
-
   virtualisation.docker.enable = true;
 
   system.stateVersion = "25.11";
