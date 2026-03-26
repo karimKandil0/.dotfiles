@@ -25,6 +25,7 @@
   ];
 
   programs.hyprland.enable = true;
+  programs.niri.enable = true;
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.experimental-features = [
@@ -49,8 +50,4 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  fileSystems."/mnt/data" = {
-    device = "/dev/disk/by-uuid/69504f9c-0053-470c-99e6-e2340e672759";
-    fsType = "ext4";
-  };
 }

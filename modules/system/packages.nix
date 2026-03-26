@@ -5,6 +5,9 @@
 
   environment.systemPackages = with pkgs; [
     codex
+    efibootmgr
+    javaPackages.compiler.semeru-bin.jdk-8
+    x3270
     go
     virt-manager
     qemu

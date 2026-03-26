@@ -11,6 +11,11 @@
     recursive = true;
   };
 
+  xdg.configFile."niri" = {
+    source = ../../config/niri;
+    recursive = true;
+  };
+
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";
     package = pkgs.bibata-cursors;

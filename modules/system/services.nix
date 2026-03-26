@@ -82,6 +82,11 @@
 
   };
 
+  # n8n setup
+  services.n8n = {
+    enable = false;
+  };
+
   # Desktop & local AI helpers
   services.ollama = {
     enable = false;
@@ -151,17 +156,10 @@
   };
 
   services.immich = {
-    enable = true;
+    enable = false;
     port = 2283;
     host = "127.0.0.1";
     mediaLocation = "/mnt/data/immich";
-  };
-  systemd.services.immich-server.after = [ "mnt-data-immich.mount" ];
-  systemd.services.immich-server.requires = [ "mnt-data-immich.mount" ];
-  fileSystems."/mnt/data/immich" = {
-    device = "/dev/disk/by-uuid/69504f9c-0053-470c-99e6-e2340e672759";
-    fsType = "ext4";
-    options = [ "defaults" "nofail" ];
   };
 
   # Reverse proxy hosts

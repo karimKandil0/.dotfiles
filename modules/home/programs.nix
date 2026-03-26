@@ -13,6 +13,7 @@
     myZen
     dmidecode
     cmatrix
+    vscode
     hyprshot
     cava
     kitty
