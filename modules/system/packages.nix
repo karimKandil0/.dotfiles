@@ -15,6 +15,8 @@
     git
     aria2
     dig
+    w3m
+    gh-dash
     shellcheck
     zip
     gettext
@@ -37,21 +39,12 @@
     pcre2
     glibc
     vim
-    ifuse
-    altserver-linux
-    discord
     ripgrep
     tree-sitter
     lua
     luarocks
-    antimicrox
-    wofi
-    rofi
     usbutils
     btop
-    ncdu
-    fzf
-    bat
     docker
     openssl
     zlib
@@ -61,7 +54,6 @@
     kitty
     rcon-cli
     swww
-    thonny
     pywal
     rofi
     fastfetch
@@ -71,8 +63,6 @@
     unrar
     tailscale
     tree
-    wine
-    lutris
     python3
   ];
 
@@ -92,4 +82,5 @@
 
   programs.steam.enable = true;
   programs.gamemode.enable = true;
+  programs.firejail.enable = true;
 }

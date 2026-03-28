@@ -191,6 +191,7 @@
   services.tailscale.enable = true;
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
   networking.enableIPv6 = true;
+  networking.firewall.checkReversePath = "loose";
   networking.firewall = {
 
     enable = true;
@@ -200,6 +201,9 @@
       # Minecraft Ports
       25565
       25566
+      443
+      53
+      123
       # Web
     ];
 
