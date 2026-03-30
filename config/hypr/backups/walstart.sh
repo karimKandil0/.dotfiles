@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/home/karimkandil/.nix-profile/bin/bash
 
 # Directory containing your wallpapers
 WALL_DIR="$HOME/Walls/All/"
@@ -7,7 +7,7 @@ WALL_DIR="$HOME/Walls/All/"
 HISTORY_FILE="$HOME/.cache/wal_history"
 
 # Time between wallpaper changes (seconds)
-INTERVAL=500
+INTERVAL=500  # idk
 
 # Start swww daemon if it's not already running
 if ! pgrep -x "swww-daemon" >/dev/null 2>&1; then
@@ -51,13 +51,6 @@ change_wallpaper() {
 
     # Generate colorscheme with wal based on the current wallpaper
     wal -i "$IMG"
-    # 1. Update Kitty theme in real-time
-    # This sends a signal to all open Kitty windows to reload colors
-    kill -USR1 $(pgrep kitty) 2>/dev/null
-
-    # 2. Update Rofi theme (by symlinking the pywal rofi config)
-    # This ensures your $menu variable always points to the current theme
-    ln -sf "$HOME/.cache/wal/colors-rofi-dark.rasi" "$HOME/.config/rofi/pywal.rasi"
 
     # Source the pywal colors
     source "${HOME}/.cache/wal/colors.sh"

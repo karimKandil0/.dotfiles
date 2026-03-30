@@ -25,9 +25,16 @@
   programs.bash = {
     enable = true;
     initExtra = ''
-      unset __HM_SESS_VARS_SOURCED
-      source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-    '';
+    # Clear the 'sourced' flag to ensure variables are refreshed
+    unset __HM_SESS_VARS_SOURCED
+
+    # Try the modern XDG State path first, then fallback to the legacy link
+    if [ -f "$HOME/.local/state/nix/profiles/home-manager/etc/profile.d/hm-session-vars.sh" ]; then
+      source "$HOME/.local/state/nix/profiles/home-manager/etc/profile.d/hm-session-vars.sh"
+    elif [ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+      source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+    fi
+  '';
   };
 
 }
