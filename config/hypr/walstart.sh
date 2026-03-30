@@ -51,15 +51,9 @@ change_wallpaper() {
 
     # Generate colorscheme with wal based on the current wallpaper
     wal -i "$IMG"
-    ln -sf "$HOME/.cache/wal/colors-rofi-dark.rasi" "$HOME/.config/rofi/pywal.rasi"
 
     # Source the pywal colors
     source "${HOME}/.cache/wal/colors.sh"
-
-    # Set Hyprland border colors directly
-    # You can change color4 and color8 to any other pywal color variable
-    hyprctl keyword general:col.active_border "rgb(${color4//#})"
-    hyprctl keyword general:col.inactive_border "rgb(${color8//#})"
 
     # Add the new wallpaper to the history
     echo "$IMG" >> "$HISTORY_FILE"
