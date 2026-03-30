@@ -6,6 +6,7 @@
     ./modules/system/services.nix
     ./modules/system/users.nix
     ./modules/system/playit.nix
+    ./modules/system/lighting.nix
   ];
 
 }

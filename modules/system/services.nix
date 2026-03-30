@@ -204,7 +204,10 @@
       443
       53
       123
-      # Web
+      # Tuya
+      6666
+      6667
+      7000
     ];
 
     # TCP ports required by exposed services

@@ -28,12 +28,15 @@
     prismlauncher
     jdk17
     typioca
-    # ESP TOOLS
     cmake
     ninja
     git
     python3
     python3Packages.pip
+    python3Packages.tinytuya
+    python3Packages.numpy
+    python3Packages.pyaudio
+    python3Packages.evdev
     python3Packages.virtualenv
     gnumake
     flex
