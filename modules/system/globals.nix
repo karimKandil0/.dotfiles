@@ -27,7 +27,6 @@
   programs.hyprland.enable = true;
   programs.niri.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
   nixpkgs.config.experimental-features = [
     "nix-command"
     "flakes"

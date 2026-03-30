@@ -83,16 +83,21 @@
   };
 
   # n8n setup
-  services.n8n = {
-    enable = false;
+
+  sops.secrets.n8n_enc_key = {
+    owner = "root";
+    group = "root";
+    mode = "0444";
+    sopsFile = ../../secrets/secrets.yaml;
   };
 
-  # Desktop & local AI helpers
-  services.ollama = {
-    enable = false;
-    acceleration = "cuda";
-    package = pkgs.ollama.override {
-      cudaArches = [ "61" ];
+  services.n8n = {
+    enable = true;
+
+    environment = {
+      N8N_PORT = 5678;
+      N8N_HOST = "0.0.0.0";
+      N8N_ENCRYPTION_KEY_FILE = config.sops.secrets.n8n_enc_key.path;
     };
   };
 
@@ -137,17 +142,6 @@
   security.rtkit.enable = true;
   services.usbmuxd.enable = true;
 
-  # Self-hosted apps
-  services.vaultwarden = {
-    enable = true;
-      config = {
-        DOMAIN = "https://k-nix.taila13585.ts.net";
-        ROCKET_ADDRESS = "127.0.0.1";
-        ROCKET_PORT = 8222;
-        SIGNUPS_ALLOWED = true;
-      };
-  };
-
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -155,32 +149,6 @@
     pulse.enable = true;
   };
 
-  services.immich = {
-    enable = false;
-    port = 2283;
-    host = "127.0.0.1";
-    mediaLocation = "/mnt/data/immich";
-  };
-
-  # Reverse proxy hosts
-  services.caddy = {
-    enable = false;
-    virtualHosts = {
-      "k-nix.taila13585.ts.net" = {
-        extraConfig = "reverse_proxy localhost:8222"; # Vaultwarden
-      };
-      # Add http:// prefix to disable automatic TLS redirection/handshake
-      "http://k-nix.taila13585.ts.net:444" = {
-        extraConfig = "reverse_proxy localhost:2283"; # Immich
-      };
-    };
-  };
-
-  # System & hardware daemons
-  systemd.services.caddy.serviceConfig.AmbientCapabilities = "CAP_NET_BIND_SERVICE";
-  systemd.services.tailscaled.serviceConfig.Environment = [ "TS_PERMIT_CERT_UID=caddy" ];
-  services.tor.enable = false;
-  services.tor.client.enable = false;
   services.openssh.enable = true;
   services.upower.enable = true;
   networking.networkmanager.enable = true;
@@ -220,6 +188,8 @@
       8081
       # SSH
       22
+      # N8N
+      5678
     ];
 
   };
