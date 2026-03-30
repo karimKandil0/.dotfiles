@@ -51,12 +51,6 @@ change_wallpaper() {
 
     # Generate colorscheme with wal based on the current wallpaper
     wal -i "$IMG"
-    # 1. Update Kitty theme in real-time
-    # This sends a signal to all open Kitty windows to reload colors
-    kill -USR1 $(pgrep kitty) 2>/dev/null
-
-    # 2. Update Rofi theme (by symlinking the pywal rofi config)
-    # This ensures your $menu variable always points to the current theme
     ln -sf "$HOME/.cache/wal/colors-rofi-dark.rasi" "$HOME/.config/rofi/pywal.rasi"
 
     # Source the pywal colors
