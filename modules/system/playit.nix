@@ -1,5 +1,7 @@
 { pkgs, lib, inputs, ... }:
 
+### Make systemd service for playit tmux session ###
+
 let
   playit-pkg = inputs.playit.packages."x86_64-linux".default;
 in

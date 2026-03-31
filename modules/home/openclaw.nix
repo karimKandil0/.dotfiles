@@ -1,9 +1,10 @@
-{ pkgs, inputs }:
+{ pkgs, config, lib, inputs, ... }:
 
 {
 
+ ### Define openclaw and download it ###
+   
   programs.openclaw = {
-    package = inputs.openclaw.packages.${pkgs.system}.openclaw;
     enable = true;
   };
 

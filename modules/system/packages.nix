@@ -1,12 +1,13 @@
 { config, pkgs, ... }:
 {
 
+  ### Allow unfree packages ###
   nixpkgs.config.allowUnfree = true;
 
+  ### Download packages system-wide ###
   environment.systemPackages = with pkgs; [
     codex
     efibootmgr
-    determinate
     javaPackages.compiler.semeru-bin.jdk-8
     x3270
     go

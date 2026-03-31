@@ -1,4 +1,5 @@
 { config, pkgs, ... }: {
+  ### Bash and Alias config ###
   programs.bash = {
     enable = true;
     shellAliases = {

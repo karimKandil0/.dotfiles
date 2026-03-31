@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 {
+
+  ### GIT auth ###
+
   programs.git = {
     enable = true;
     settings = {

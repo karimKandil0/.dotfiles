@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 {
+  ### Symlinking config files ###
 
   xdg.configFile."hypr" = {
     source = ../../config/hypr;
@@ -15,6 +16,8 @@
     source = ../../config/niri;
     recursive = true;
   };
+
+  ### Set cursor ###
 
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";
