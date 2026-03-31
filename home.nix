@@ -13,6 +13,8 @@
     ./modules/home/git.nix
     ./modules/home/programs.nix
     ./modules/home/xdg.nix
+    ./modules/home/openclaw.nix
+    inputs.openclaw.homeManagerModules.openclaw
   ];
 
   # General #

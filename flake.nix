@@ -10,12 +10,10 @@
     };
 
     zen-browser.url = "github:youwen5/zen-browser-flake";
-
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-
     playit.url = "github:pedorich-n/playit-nixos-module";
-
     sops-nix.url = "github:Mic92/sops-nix";
+    openclaw.url = "github:openclaw/nix-openclaw";
 
   };
 
@@ -27,6 +25,7 @@
       zen-browser,
       nix-minecraft,
       playit,
+      openclaw,
       ...
     }@inputs:
     let
@@ -43,6 +42,7 @@
           playit.nixosModules.default
           inputs.sops-nix.nixosModules.sops
           {
+	    nixpkgs.overlays = [ openclaw.overlays.default ];
 
             home-manager.useGlobalPkgs = true;
 	    home-manager.useUserPackages = true;
