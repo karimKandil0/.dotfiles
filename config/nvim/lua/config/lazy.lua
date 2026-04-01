@@ -41,21 +41,25 @@ require("lazy").setup({
       "neovim/nvim-lspconfig",
     },
     config = function()
+      local lspconfig = require("lspconfig")
+
+      local ts_name = lspconfig.ts_ls and "ts_ls" or "tsserver"
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "ts_ls", "pyright", "bashls", "jsonls" },
+        ensure_installed = { "lua_ls", ts_name, "pyright", "bashls", "jsonls" },
         automatic_installation = true,
       })
 
-      local lspconfig = require("lspconfig")
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       local ok_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
       if ok_cmp then
         capabilities = cmp_lsp.default_capabilities(capabilities)
       end
 
-      local servers = { "lua_ls", "ts_ls", "pyright", "bashls", "jsonls" }
+      local servers = { "lua_ls", ts_name, "pyright", "bashls", "jsonls" }
       for _, server in ipairs(servers) do
-        lspconfig[server].setup({ capabilities = capabilities })
+        if lspconfig[server] then
+          lspconfig[server].setup({ capabilities = capabilities })
+        end
       end
     end,
   },
@@ -91,7 +95,15 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter.configs").setup({
+      local ok, ts = pcall(require, "nvim-treesitter.configs")
+      if not ok then
+        vim.schedule(function()
+          vim.notify("nvim-treesitter not ready yet; run :Lazy sync", vim.log.levels.WARN)
+        end)
+        return
+      end
+
+      ts.setup({
         ensure_installed = { "lua", "vim", "vimdoc", "bash", "json", "python", "javascript", "typescript" },
         highlight = { enable = true },
         indent = { enable = true },
