@@ -1,7 +1,6 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
-  ### Symlinking config files ###
-
+  # Symlink app configs
   xdg.configFile."hypr" = {
     source = ../../config/hypr;
     recursive = true;
@@ -17,8 +16,7 @@
     recursive = true;
   };
 
-  ### Set cursor ###
-
+  # Cursor theme
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";
     package = pkgs.bibata-cursors;

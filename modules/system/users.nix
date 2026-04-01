@@ -1,8 +1,5 @@
-{ config, pkgs, ... }:
-
+{ ... }:
 {
-
-  ### User permissions ###
   users.users.karimkandil = {
     isNormalUser = true;
     extraGroups = [

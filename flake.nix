@@ -14,19 +14,14 @@
     playit.url = "github:pedorich-n/playit-nixos-module";
     sops-nix.url = "github:Mic92/sops-nix";
     openclaw.url = "github:openclaw/nix-openclaw";
-
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      zen-browser,
-      nix-minecraft,
-      playit,
-      openclaw,
-      ...
+    { nixpkgs
+    , home-manager
+    , zen-browser
+    , playit
+    , ...
     }@inputs:
     let
       system = "x86_64-linux";
@@ -41,28 +36,27 @@
           ./configuration.nix
           playit.nixosModules.default
           inputs.sops-nix.nixosModules.sops
+          home-manager.nixosModules.home-manager
           {
-	    nixpkgs.overlays = [ openclaw.overlays.default ];
-	    nix.settings = {
+            nixpkgs.overlays = [ inputs.openclaw.overlays.default ];
+
+            nix.settings = {
               substituters = [ "https://cache.garnix.io" ];
               trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
-	    };
+            };
 
             home-manager.useGlobalPkgs = true;
-	    home-manager.useUserPackages = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "hm-bak";
 
             home-manager.extraSpecialArgs = {
               inherit inputs myZen;
             };
 
             home-manager.users.karimkandil = {
-              imports = [
-                ./home.nix
-              ];
+              imports = [ ./home.nix ];
             };
-
           }
-          home-manager.nixosModules.home-manager
         ];
       };
     };

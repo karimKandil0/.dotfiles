@@ -100,7 +100,7 @@ class LightingController:
                         self.toggle_power()
                     elif self.is_enabled:
                         self.last_press_time = time.time()
-        except Exception as e:
+        except Exception:
             sys.exit(1)
 
 if __name__ == "__main__":

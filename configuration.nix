@@ -8,7 +8,4 @@
     ./modules/system/playit.nix
     ./modules/system/lighting.nix
   ];
-
 }
-
-

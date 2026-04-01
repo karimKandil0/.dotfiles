@@ -1,19 +1,13 @@
-{ config, pkgs, ... }:
+{ ... }:
 {
-
-  ### GIT auth ###
-
+  # Git + GitHub CLI
   programs.git = {
     enable = true;
-    settings = {
-      user = {
-        name = "karimKandil0";
-        email = "kimo989yt@gmail.com";
-      };
+    settings.user = {
+      name = "karimKandil0";
+      email = "kimo989yt@gmail.com";
     };
   };
 
-  programs.gh = {
-    enable = true;
-  };
+  programs.gh.enable = true;
 }

@@ -1,9 +1,4 @@
-{
-  pkgs,
-  inputs,
-  myZen,
-  ...
-}:
+{ pkgs, myZen, ... }:
 {
 
   ### User specific packages ###
