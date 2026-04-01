@@ -41,9 +41,7 @@ require("lazy").setup({
       "neovim/nvim-lspconfig",
     },
     config = function()
-      local lspconfig = require("lspconfig")
-
-      local ts_name = lspconfig.ts_ls and "ts_ls" or "tsserver"
+      local ts_name = "ts_ls"
       require("mason-lspconfig").setup({
         ensure_installed = { "lua_ls", ts_name, "pyright", "bashls", "jsonls" },
         automatic_installation = true,
@@ -56,9 +54,22 @@ require("lazy").setup({
       end
 
       local servers = { "lua_ls", ts_name, "pyright", "bashls", "jsonls" }
+
+      if vim.lsp and vim.lsp.config and vim.lsp.enable then
+        for _, server in ipairs(servers) do
+          vim.lsp.config(server, { capabilities = capabilities })
+          vim.lsp.enable(server)
+        end
+        return
+      end
+
+      local lspconfig = require("lspconfig")
       for _, server in ipairs(servers) do
-        if lspconfig[server] then
-          lspconfig[server].setup({ capabilities = capabilities })
+        local ok_server, server_cfg = pcall(function()
+          return lspconfig[server]
+        end)
+        if ok_server and server_cfg then
+          server_cfg.setup({ capabilities = capabilities })
         end
       end
     end,
