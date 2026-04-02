@@ -11,6 +11,7 @@
     javaPackages.compiler.semeru-bin.jdk-8
     x3270
     go
+    waybar
     socat
     virt-manager
     qemu

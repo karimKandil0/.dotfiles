@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+# Prevent duplicate instances (common after reloads/manual starts)
+LOCK_FILE="$HOME/.cache/walstart.lock"
+exec 9>"$LOCK_FILE"
+if ! flock -n 9; then
+    echo "walstart already running, exiting."
+    exit 0
+fi
+
 # Directory containing your wallpapers
 WALL_DIR="$HOME/Walls/All/"
 

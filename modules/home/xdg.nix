@@ -11,6 +11,11 @@
     recursive = true;
   };
 
+  xdg.configFile."waybar" = {
+    source = ../../config/waybar;
+    recursive = true;
+  };
+
   xdg.configFile."niri" = {
     source = ../../config/niri;
     recursive = true;
