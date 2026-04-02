@@ -16,6 +16,11 @@
     recursive = true;
   };
 
+  xdg.configFile."kitty" = {
+    source = ../../config/kitty;
+    recursive = true;
+  };
+
   # Cursor theme
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";

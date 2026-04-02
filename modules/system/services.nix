@@ -51,7 +51,7 @@
       };
 
       za2azee2-fabric = {
-        enable = true;
+        enable = false;
         package = pkgs.fabricServers.fabric;
 
         serverProperties = {
