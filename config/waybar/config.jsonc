@@ -1,0 +1,63 @@
+[
+  {
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 8,
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["mpris", "pulseaudio", "network", "clock", "tray"],
+
+    "hyprland/workspaces": {
+      "format": "{name}",
+      "active-only": false,
+      "all-outputs": false
+    },
+
+    "hyprland/window": {
+      "format": "{title}",
+      "max-length": 60,
+      "separate-outputs": true
+    },
+
+    "mpris": {
+      "format": "{player_icon} {dynamic}",
+      "format-paused": "{player_icon} {dynamic}",
+      "dynamic-len": 35,
+      "dynamic-order": ["title", "artist"],
+      "player-icons": {
+        "default": "",
+        "spotify": "",
+        "mpv": ""
+      },
+      "status-icons": {
+        "playing": "▶",
+        "paused": "⏸"
+      }
+    },
+
+    "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-muted": "󰖁 mute",
+      "format-icons": {
+        "default": ["", "", ""]
+      }
+    },
+
+    "network": {
+      "format-wifi": "  {essid}",
+      "format-ethernet": "󰈀 connected",
+      "format-disconnected": "󰖪 offline",
+      "tooltip": false
+    },
+
+    "clock": {
+      "format": "  {:%H:%M}"
+    },
+
+    "tray": {
+      "spacing": 8
+    }
+  }
+]
