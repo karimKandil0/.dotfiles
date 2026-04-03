@@ -2,7 +2,7 @@
 {
 
   hardware.uinput.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_xanmod;
+  boot.kernelPackages = pkgs.linuxPackages;
 
   powerManagement.cpuFreqGovernor = "performance";
   zramSwap.enable = true;

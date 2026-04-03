@@ -38,7 +38,7 @@
 
       agents = {
         defaults = {
-          model = "openai-codex/gpt-5.3-codex";
+          model = "openai-codex/gpt-5.1-codex-mini";
           workspace = "/home/karimkandil/.openclaw/workspace";
         };
       };

@@ -29,6 +29,16 @@
   programs.hyprland.enable = true;
   programs.niri.enable = true;
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+  ];
+
+  fonts.fontconfig = {
+    defaultFonts = {
+      monospace = [ "JetBrainsMono Nerd Font Mono" "JetBrainsMono Nerd Font" ];
+    };
+  };
+
   # Experimental nix CLI + flake support
   nix.settings.experimental-features = [
     "nix-command"

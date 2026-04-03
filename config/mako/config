@@ -1,0 +1,32 @@
+# ~/.dotfiles/config/mako/config
+# Minimal, clean notifications matching your dark setup
+
+font=JetBrainsMono Nerd Font 10
+background-color=#141418D9
+text-color=#CDD6F4FF
+border-color=#CBA6F7FF
+progress-color=over #313244FF
+
+border-size=2
+border-radius=10
+padding=10
+margin=12
+width=360
+height=140
+max-icon-size=48
+default-timeout=5000
+ignore-timeout=0
+
+anchor=top-right
+layer=overlay
+sort=-time
+
+[urgency=low]
+border-color=#89B4FAFF
+
+[urgency=normal]
+border-color=#CBA6F7FF
+
+[urgency=high]
+border-color=#F38BA8FF
+default-timeout=0
