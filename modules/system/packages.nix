@@ -22,6 +22,10 @@
     w3m
     gh-dash
     shellcheck
+    statix
+    deadnix
+    ruff
+    nodePackages.eslint_d
     zip
     gettext
     tmux

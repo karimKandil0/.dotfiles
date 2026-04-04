@@ -12,6 +12,11 @@
     cava
     kitty
     neovim
+    mako
+    hyprlock
+    hypridle
+    libnotify
+    home-manager
     nil
     nixpkgs-fmt
     nemo

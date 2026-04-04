@@ -1,20 +1,19 @@
 # ~/.dotfiles/config/mako/config
-# Minimal, clean notifications matching your dark setup
+# Minimal, modern notifications tuned to your Hyprland aesthetic
 
-font=JetBrainsMono Nerd Font 10
-background-color=#141418D9
-text-color=#CDD6F4FF
-border-color=#CBA6F7FF
-progress-color=over #313244FF
+font=JetBrainsMono Nerd Font 11
+background-color=#12121ACC
+text-color=#e6e6ffEE
+progress-color=#313244FF
 
-border-size=2
-border-radius=10
-padding=10
-margin=12
-width=360
-height=140
-max-icon-size=48
-default-timeout=5000
+border-size=0
+border-radius=16
+padding=12
+margin=10
+width=320
+height=62
+max-icon-size=32
+default-timeout=4200
 ignore-timeout=0
 
 anchor=top-right
@@ -22,11 +21,20 @@ layer=overlay
 sort=-time
 
 [urgency=low]
-border-color=#89B4FAFF
+background-color=#101019CC
+border-color=#00000000
+
+default-timeout=4200
 
 [urgency=normal]
-border-color=#CBA6F7FF
+background-color=#131326CC
+border-color=#cba6f7AA
+
+default-timeout=4200
 
 [urgency=high]
-border-color=#F38BA8FF
+background-color=#161426DD
+border-color=#f38ba8CC
+font=JetBrainsMono Nerd Font 12
+
 default-timeout=0

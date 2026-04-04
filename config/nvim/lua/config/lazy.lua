@@ -103,6 +103,37 @@ require("lazy").setup({
   },
 
   {
+    "mfussenegger/nvim-lint",
+    config = function()
+      local lint = require("lint")
+
+      lint.linters_by_ft = {
+        javascript = { "eslint_d" },
+        javascriptreact = { "eslint_d" },
+        typescript = { "eslint_d" },
+        typescriptreact = { "eslint_d" },
+        python = { "ruff" },
+        sh = { "shellcheck" },
+        bash = { "shellcheck" },
+        zsh = { "shellcheck" },
+        nix = { "statix" },
+      }
+
+      local lint_augroup = vim.api.nvim_create_augroup("nvim-lint", { clear = true })
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+        group = lint_augroup,
+        callback = function()
+          lint.try_lint()
+        end,
+      })
+
+      vim.keymap.set("n", "<leader>ll", function()
+        lint.try_lint()
+      end, { desc = "Run linter" })
+    end,
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
@@ -115,7 +146,7 @@ require("lazy").setup({
       end
 
       ts.setup({
-        ensure_installed = { "lua", "vim", "vimdoc", "bash", "json", "python", "javascript", "typescript" },
+        ensure_installed = { "lua", "vim", "vimdoc", "bash", "json", "python", "javascript", "typescript", "nix" },
         highlight = { enable = true },
         indent = { enable = true },
       })

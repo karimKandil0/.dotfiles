@@ -59,5 +59,17 @@
           }
         ];
       };
+
+      homeConfigurations.k-nix = home-manager.lib.homeManagerConfiguration {
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [ inputs.openclaw.overlays.default ];
+          config = {
+            allowUnfree = true;
+          };
+        };
+        modules = [ ./home.nix ];
+        extraSpecialArgs = { inherit inputs myZen; };
+      };
     };
 }
