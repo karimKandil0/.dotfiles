@@ -5,6 +5,7 @@
     ./modules/home/git.nix
     ./modules/home/programs.nix
     ./modules/home/xdg.nix
+    ./modules/home/picoclaw.nix
     # ./modules/home/openclaw.nix
     # inputs.openclaw.homeManagerModules.openclaw
   ];
@@ -20,7 +21,7 @@
 
   # openclaw.json is fully managed by Home Manager via programs.openclaw.
   # Force overwrite to avoid backup collisions on repeated rebuilds.
-  home.file.".openclaw/openclaw.json".force = true;
+  # home.file.".openclaw/openclaw.json".force = true;
 
   programs.bash = {
     enable = true;
