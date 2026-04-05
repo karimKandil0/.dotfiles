@@ -13,7 +13,7 @@
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     playit.url = "github:pedorich-n/playit-nixos-module";
     sops-nix.url = "github:Mic92/sops-nix";
-    openclaw.url = "github:openclaw/nix-openclaw";
+    # openclaw.url = "github:openclaw/nix-openclaw";
   };
 
   outputs =
@@ -38,7 +38,7 @@
           inputs.sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
-            nixpkgs.overlays = [ inputs.openclaw.overlays.default ];
+            # nixpkgs.overlays = [ inputs.openclaw.overlays.default ];
 
             nix.settings = {
               substituters = [ "https://cache.garnix.io" ];

@@ -76,6 +76,12 @@
 
   };
 
+  # Ollama
+  services.ollama = {
+    enable = false;
+    acceleration = "cuda";
+  };
+
   # n8n setup
 
   sops.secrets.n8n_enc_key = {
@@ -86,7 +92,7 @@
   };
 
   services.n8n = {
-    enable = true;
+    enable = false;
 
     environment = {
       N8N_PORT = 5678;

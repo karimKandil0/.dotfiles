@@ -7,14 +7,12 @@
     myZen
     dmidecode
     cmatrix
-    vscode
     hyprshot
     cava
     kitty
     neovim
     mako
     hyprlock
-    hypridle
     libnotify
     home-manager
     nil
@@ -50,6 +48,5 @@
     esptool
     cargo-espmonitor
   ];
-
 
 }

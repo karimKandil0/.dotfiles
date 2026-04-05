@@ -6,11 +6,6 @@
     recursive = true;
   };
 
-  home.file.".config/hypr/hypridle.conf" = {
-    source = ../../config/hypr/hypridle.conf;
-    target = ".config/hypr/hypridle.conf";
-  };
-
   xdg.configFile."nvim" = {
     source = ../../config/nvim;
     recursive = true;

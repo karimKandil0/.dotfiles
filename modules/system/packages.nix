@@ -8,8 +8,7 @@
   environment.systemPackages = with pkgs; [
     codex
     efibootmgr
-    javaPackages.compiler.semeru-bin.jdk-8
-    x3270
+    cargo
     go
     waybar
     socat
@@ -19,8 +18,6 @@
     git
     aria2
     dig
-    w3m
-    gh-dash
     shellcheck
     statix
     deadnix
