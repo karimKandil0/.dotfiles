@@ -1,0 +1,47 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* Hide navbar (address bar + buttons) — access via F6 or Tridactyl */
+#nav-bar {
+  visibility: collapse !important;
+}
+
+/* Hide menu bar */
+#toolbar-menubar {
+  display: none !important;
+}
+
+/* Hide bookmarks bar */
+#PersonalToolbar {
+  display: none !important;
+}
+
+/* Hide tab bar close buttons unless hovered */
+.tabbrowser-tab:not([selected]) .tab-close-button {
+  display: none !important;
+}
+
+/* Compact tab height */
+:root {
+  --tab-min-height: 28px !important;
+}
+
+/* Hide tab scroll arrows */
+.arrowscrollbox-overflow-start-indicator,
+.arrowscrollbox-overflow-end-indicator {
+  display: none !important;
+}
+
+/* Hide sidebar header */
+#sidebar-header {
+  display: none !important;
+}
+
+/* Remove tab strip padding */
+#TabsToolbar {
+  padding: 0 !important;
+}
+
+/* Hide new tab button */
+#tabs-newtab-button {
+  display: none !important;
+}
