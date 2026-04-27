@@ -1,13 +1,10 @@
-{ inputs, ... }:
+{ inputs, config, pkgs, ... }:
 {
   imports = [
     ./modules/home/aliases.nix
     ./modules/home/git.nix
     ./modules/home/programs.nix
     ./modules/home/xdg.nix
-    ./modules/home/picoclaw.nix
-    # ./modules/home/openclaw.nix
-    # inputs.openclaw.homeManagerModules.openclaw
   ];
 
   # Base Home Manager identity/state
@@ -18,10 +15,6 @@
   home.sessionVariables = {
     AOC_SESSION = "53616c7465645f5f42009143bad7ccc3dc0c66f4b08318323a7b2c018d451ddfdf4dad3db828e90f56a7f6bd1878d5ead4bad95982f3c3cbe5c8614346491cfa";
   };
-
-  # openclaw.json is fully managed by Home Manager via programs.openclaw.
-  # Force overwrite to avoid backup collisions on repeated rebuilds.
-  # home.file.".openclaw/openclaw.json".force = true;
 
   programs.bash = {
     enable = true;

@@ -6,8 +6,18 @@
   home.packages = with pkgs; [
     myZen
     dmidecode
+    bun
+    vimPlugins.nvim-treesitter-parsers.markdown
+    vimPlugins.nvim-treesitter-parsers.markdown_inline
+    qbittorrent
+    bottles
+    lutris
+    winetricks
+    qutebrowser
+    cabextract
     cmatrix
     hyprshot
+    obsidian
     cava
     kitty
     neovim

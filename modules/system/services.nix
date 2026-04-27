@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 {
 
   # Module imports & overlays
@@ -79,7 +79,6 @@
   # Ollama
   services.ollama = {
     enable = false;
-    acceleration = "cuda";
   };
 
   # n8n setup
@@ -190,6 +189,8 @@
       22
       # N8N
       5678
+      # Dev
+      3000
     ];
 
   };

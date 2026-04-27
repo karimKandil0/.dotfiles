@@ -2,7 +2,7 @@
 {
   # Run playit tunnel in a dedicated tmux session.
   services.playit = {
-    enable = true;
+    enable = false;
     secretPath = "/var/lib/playit/secret.toml";
   };
 

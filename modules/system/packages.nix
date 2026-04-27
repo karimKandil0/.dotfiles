@@ -7,22 +7,30 @@
   ### Download packages system-wide ###
   environment.systemPackages = with pkgs; [
     codex
+    claude-code
     efibootmgr
     cargo
     go
+    vulkan-loader
+    vulkan-tools
+    vulkan-headers
+    mesa
+    firefox
+    libGL
     waybar
     socat
+    wineWowPackages.stable
     virt-manager
     qemu
     feh
     git
+    mangohud
     aria2
     dig
     shellcheck
     statix
     deadnix
     ruff
-    nodePackages.eslint_d
     zip
     gettext
     tmux
@@ -33,7 +41,6 @@
     bibata-cursors
     nodejs
     yarn
-    nodePackages.eas-cli
     libdrm
     meson
     ninja

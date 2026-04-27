@@ -13,6 +13,16 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
   {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    priority = 1000,
+    config = function()
+      require("rose-pine").setup({ variant = "moon" })
+      vim.cmd("colorscheme rose-pine")
+    end,
+  },
+
+  {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
@@ -146,7 +156,7 @@ require("lazy").setup({
       end
 
       ts.setup({
-        ensure_installed = { "lua", "vim", "vimdoc", "bash", "json", "python", "javascript", "typescript", "nix" },
+        ensure_installed = { "lua", "vim", "vimdoc", "bash", "json", "python", "javascript", "typescript", "nix", "markdown", "markdown_inline", "rust" },
         highlight = { enable = true },
         indent = { enable = true },
       })
@@ -174,6 +184,7 @@ require("lazy").setup({
     "numToStr/Comment.nvim",
     config = true,
   },
+
 }, {
   checker = { enabled = false },
   lockfile = vim.fn.stdpath("state") .. "/lazy-lock.json",

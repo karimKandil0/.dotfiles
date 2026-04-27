@@ -6,6 +6,11 @@
     recursive = true;
   };
 
+  xdg.configFile."qutebrowser" = {
+    source = ../../config/qutebrowser;
+    recursive = true;
+  };
+
   xdg.configFile."nvim" = {
     source = ../../config/nvim;
     recursive = true;
