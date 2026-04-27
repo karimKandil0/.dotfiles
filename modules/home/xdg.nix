@@ -6,17 +6,6 @@
     recursive = true;
   };
 
-  # Firefox profile config
-  home.file.".mozilla/firefox/t3rrjeev.default/chrome/userChrome.css".source =
-    ../../config/firefox/chrome/userChrome.css;
-  home.file.".mozilla/firefox/t3rrjeev.default/user.js".source =
-    ../../config/firefox/user.js;
-
-  xdg.configFile."qutebrowser" = {
-    source = ../../config/qutebrowser;
-    recursive = true;
-  };
-
   xdg.configFile."nvim" = {
     source = ../../config/nvim;
     recursive = true;

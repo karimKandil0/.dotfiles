@@ -13,7 +13,6 @@
     bottles
     lutris
     winetricks
-    qutebrowser
     cabextract
     cmatrix
     hyprshot

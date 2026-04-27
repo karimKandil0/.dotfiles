@@ -42,6 +42,12 @@
     options snd-hda-intel model=alc221-hp-mic
   '';
 
+  fileSystems."/mnt/music" = {
+    device = "/dev/disk/by-uuid/d040eeb3-a134-449c-a830-da0c8741dff5";
+    fsType = "ext4";
+    options = [ "defaults" "nofail" ];
+  };
+
   hardware.keyboard.qmk.enable = true;
 
   boot.kernelModules = [ "uinput" ];
