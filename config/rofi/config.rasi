@@ -1,0 +1,87 @@
+configuration {
+    modi:                   "drun";
+    show-icons:             true;
+    icon-theme:             "Papirus-Dark";
+    drun-display-format:    "{name}";
+    display-drun:           "";
+    font:                   "JetBrainsMono Nerd Font 12";
+}
+
+* {
+    bg:         #1a1a1a;
+    bg-alt:     #242424;
+    fg:         #d4d4d4;
+    fg-dim:     #6b6b6b;
+    accent:     #c0c0c0;
+    selected:   #2e2e2e;
+    border:     #333333;
+
+    background-color:   transparent;
+    text-color:         @fg;
+}
+
+window {
+    background-color:   @bg;
+    border:             1px solid @border;
+    border-radius:      6px;
+    width:              480px;
+    padding:            8px;
+}
+
+mainbox {
+    background-color:   transparent;
+    spacing:            0;
+}
+
+inputbar {
+    background-color:   @bg-alt;
+    border-radius:      4px;
+    padding:            10px 14px;
+    margin:             0 0 8px 0;
+    children:           [ prompt, entry ];
+}
+
+prompt {
+    background-color:   transparent;
+    text-color:         @fg-dim;
+    padding:            0 8px 0 0;
+}
+
+entry {
+    background-color:   transparent;
+    text-color:         @fg;
+    placeholder:        "search...";
+    placeholder-color:  @fg-dim;
+}
+
+listview {
+    background-color:   transparent;
+    lines:              8;
+    columns:            1;
+    spacing:            2px;
+    scrollbar:          false;
+}
+
+element {
+    background-color:   transparent;
+    border-radius:      4px;
+    padding:            8px 10px;
+    spacing:            10px;
+    orientation:        horizontal;
+}
+
+element selected {
+    background-color:   @selected;
+    text-color:         @accent;
+}
+
+element-icon {
+    size:               20px;
+    vertical-align:     0.5;
+}
+
+element-text {
+    background-color:   transparent;
+    text-color:         inherit;
+    vertical-align:     0.5;
+}

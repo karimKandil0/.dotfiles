@@ -6,6 +6,11 @@
     recursive = true;
   };
 
+  xdg.configFile."rofi" = {
+    source = ../../config/rofi;
+    recursive = true;
+  };
+
   xdg.configFile."nvim" = {
     source = ../../config/nvim;
     recursive = true;
