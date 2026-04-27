@@ -6,6 +6,11 @@
     recursive = true;
   };
 
+  xdg.configFile."firefox" = {
+    source = ../../config/firefox;
+    recursive = true;
+  };
+
   xdg.configFile."qutebrowser" = {
     source = ../../config/qutebrowser;
     recursive = true;

@@ -10,7 +10,7 @@ c.confirm_quit = ["downloads"]
 c.downloads.remove_finished = 5000
 c.editor.command = ["kitty", "-e", "nvim", "{}"]
 
-c.input.insert_unbound_keys = "passthrough"
+c.input.forward_unbound_keys = "auto"
 c.scrolling.smooth = True
 c.scrolling.bar = "never"
 
@@ -40,11 +40,9 @@ c.tabs.title.format_pinned = "{audio}{index}"
 c.url.default_page = "about:blank"
 c.url.start_pages = ["about:blank"]
 c.url.searchengines = {
-    "DEFAULT": "https://search.brave.com/search?q={}",
-    "g": "https://google.com/search?q={}",
+    "DEFAULT": "https://duckduckgo.com/?q={}",
     "yt": "https://youtube.com/search?q={}",
     "gh": "https://github.com/search?q={}",
-    "ddg": "https://duckduckgo.com/?q={}",
     "nix": "https://search.nixos.org/packages?query={}",
     "nixo": "https://search.nixos.org/options?query={}",
     "mdn": "https://developer.mozilla.org/en-US/search?q={}",
@@ -269,7 +267,6 @@ config.bind("go", "cmd-set-text :open {url}")
 config.bind("gO", "cmd-set-text :open -t {url}")
 
 # Search engines quick access
-config.bind(",g", "cmd-set-text -s :open g ")
 config.bind(",y", "cmd-set-text -s :open yt ")
 config.bind(",n", "cmd-set-text -s :open nix ")
 config.bind(",N", "cmd-set-text -s :open nixo ")
@@ -281,7 +278,7 @@ config.bind(",d", "download-clear")
 
 # Config
 config.bind(",r", "config-source")
-config.bind(",e", "cmd-set-text :edit-file " + config.configdir + "/config.py")
+config.bind(",e", "cmd-set-text :edit-file " + str(config.configdir) + "/config.py")
 
 # Misc
 config.bind(".", "cmd-repeat-last")
