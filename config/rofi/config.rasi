@@ -1,7 +1,6 @@
 configuration {
     modi:                   "drun";
-    show-icons:             true;
-    icon-theme:             "Papirus-Dark";
+    show-icons:             false;
     drun-display-format:    "{name}";
     display-drun:           "";
     font:                   "JetBrainsMono Nerd Font 12";
@@ -22,7 +21,8 @@ configuration {
 
 window {
     background-color:   @bg;
-    border:             1px solid @border;
+    border:             1px;
+    border-color:       @border;
     border-radius:      6px;
     width:              480px;
     padding:            8px;
@@ -73,11 +73,6 @@ element {
 element selected {
     background-color:   @selected;
     text-color:         @accent;
-}
-
-element-icon {
-    size:               20px;
-    vertical-align:     0.5;
 }
 
 element-text {

@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-exec zen --new-window https://music.apple.com
+exec firefox --kiosk https://music.apple.com/eg/home

@@ -16,6 +16,7 @@
     vulkan-headers
     mesa
     firefox
+    qutebrowser
     libGL
     waybar
     socat
