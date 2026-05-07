@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, pkgs-unstable, ... }:
 {
   imports = [
     ./modules/home/aliases.nix

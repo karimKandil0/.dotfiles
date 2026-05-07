@@ -10,7 +10,7 @@
     claude-code
     efibootmgr
     cargo
-    go
+    wayland
     vulkan-loader
     vulkan-tools
     vulkan-headers

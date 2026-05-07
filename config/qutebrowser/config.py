@@ -24,7 +24,7 @@ color8   = colors["colors"]["color8"]
 # General
 # =============================================================================
 
-c.auto_save.session = True
+c.auto_save.session = False
 c.confirm_quit = ["downloads"]
 c.downloads.remove_finished = 5000
 c.editor.command = ["kitty", "-e", "nvim", "{}"]
@@ -34,13 +34,7 @@ c.scrolling.bar = "never"
 
 c.content.autoplay = False
 c.content.blocking.enabled = True
-c.content.blocking.method = "adblock"
-c.content.blocking.adblock.lists = [
-    "https://easylist.to/easylist/easylist.txt",
-    "https://easylist.to/easylist/easyprivacy.txt",
-    "https://secure.fanboy.com.au/fanboy-cookiemonster.txt",
-    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt",
-]
+c.content.blocking.method = "hosts"
 c.content.javascript.clipboard = "access"
 c.content.notifications.enabled = False
 c.content.geolocation = False

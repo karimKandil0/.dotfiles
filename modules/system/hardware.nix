@@ -42,11 +42,15 @@
     options snd-hda-intel model=alc221-hp-mic
   '';
 
-  fileSystems."/mnt/music" = {
+  fileSystems."/mnt/storage" = {
     device = "/dev/disk/by-uuid/d040eeb3-a134-449c-a830-da0c8741dff5";
     fsType = "ext4";
     options = [ "defaults" "nofail" ];
   };
+
+  systemd.tmpfiles.rules = [
+    "d /mnt/storage 0755 karimkandil users -"
+  ];
 
   hardware.keyboard.qmk.enable = true;
 

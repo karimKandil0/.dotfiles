@@ -2,7 +2,7 @@
   description = "karim's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -10,17 +10,14 @@
     };
 
     zen-browser.url = "github:youwen5/zen-browser-flake";
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-    playit.url = "github:pedorich-n/playit-nixos-module";
     sops-nix.url = "github:Mic92/sops-nix";
-    # openclaw.url = "github:openclaw/nix-openclaw";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   };
 
   outputs =
     { nixpkgs
     , home-manager
     , zen-browser
-    , playit
     , ...
     }@inputs:
     let
@@ -34,13 +31,16 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./configuration.nix
-          playit.nixosModules.default
           inputs.sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
-            # nixpkgs.overlays = [ inputs.openclaw.overlays.default ];
+            nixpkgs.overlays = [
+              (final: prev: {
+                openldap = prev.openldap.overrideAttrs (_: { doCheck = false; });
+              })
+            ];
 
-	    nixpkgs.config.allowInsecurePredicate = pkg: (nixpkgs.lib.getName pkg) == "olm";
+	    nixpkgs.config.allowInsecurePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "openclaw" ];
 
             nix.settings = {
               substituters = [ "https://cache.garnix.io" ];
@@ -53,6 +53,7 @@
 
             home-manager.extraSpecialArgs = {
               inherit inputs myZen;
+              pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; config.permittedInsecurePackages = [ "openclaw-2026.4.22" ]; };
             };
 
             home-manager.users.karimkandil = {
@@ -65,7 +66,6 @@
       homeConfigurations.k-nix = home-manager.lib.homeManagerConfiguration {
         pkgs = import inputs.nixpkgs {
           inherit system;
-          overlays = [ inputs.openclaw.overlays.default ];
           config = {
             allowUnfree = true;
           };

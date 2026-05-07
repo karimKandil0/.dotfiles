@@ -1,4 +1,4 @@
-{ pkgs, myZen, ... }:
+{ pkgs, pkgs-unstable, myZen, ... }:
 {
 
   ### User specific packages ###
@@ -10,7 +10,6 @@
     vimPlugins.nvim-treesitter-parsers.markdown
     vimPlugins.nvim-treesitter-parsers.markdown_inline
     qbittorrent
-    bottles
     lutris
     winetricks
     cabextract

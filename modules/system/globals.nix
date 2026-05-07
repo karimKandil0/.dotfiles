@@ -19,7 +19,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  virtualisation.docker.enable = false;
+  virtualisation.docker.enable = true;
 
   programs.nix-ld = {
     enable = true;
