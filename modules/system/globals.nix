@@ -39,7 +39,6 @@
     };
   };
 
-  # Experimental nix CLI + flake support
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

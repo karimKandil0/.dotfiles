@@ -1,9 +1,9 @@
 input {
     focus-follows-mouse
-    warp-mouse-to-focus
 
     keyboard {
         xkb {
+            layout "us"
         }
         numlock
     }
@@ -11,7 +11,7 @@ input {
     touchpad {
         off
     }
-    
+
     mouse {
     }
 
@@ -24,13 +24,6 @@ cursor {
     hide-when-typing
 }
 
-output "HDMI-A-1" {
-    mode "1366x512@120.030"
-    scale 1
-    transform "normal"
-    position x=0 y=0
-}
-
 output "DP-1" {
     mode "1920x1080@120.030"
     scale 1
@@ -39,7 +32,7 @@ output "DP-1" {
 }
 
 layout {
-    gaps 5
+    gaps 14
 
     center-focused-column "never"
 
@@ -49,24 +42,20 @@ layout {
         proportion 0.66667
     }
 
-    insert-hint {
-        color "#ffffff33"
-    }
-
     default-column-width { proportion 0.5; }
 
     focus-ring {
-        width 0.5
-	active-color "#ffffff"
-	inactive-color "#ffffff"
+        off
     }
 
     border {
-	off
+        width 2
+        active-color "#cba6f7"    // WAL_ACTIVE
+        inactive-color "#45475a80"  // WAL_INACTIVE
     }
 
     shadow {
-	off
+        off
     }
 
     struts {
@@ -75,9 +64,12 @@ layout {
 
 prefer-no-csd
 
-spawn-sh-at-startup "~/.dotfiles/config/niri/walstart.sh"
+spawn-at-startup "mako" "--config" "/home/karimkandil/.dotfiles/config/mako/config"
+spawn-at-startup "hypridle" "-c" "/home/karimkandil/.dotfiles/config/hypr/hypridle.conf"
+spawn-at-startup "swaybg" "-i" "/home/karimkandil/Walls/All/wallhaven-1pxxl9_1920x1080.png"
 
 hotkey-overlay {
+  skip-at-startup
 }
 
 screenshot-path "~/Screenshots/%Y-%m-%d %H-%M-%S.png"
@@ -129,20 +121,26 @@ animations {
 
 window-rule {
     match is-active=false
+    opacity 0.94
+}
+
+window-rule {
+    match is-active=false
     match app-id="kitty"
     opacity 0.9
 }
 
 binds {
-    Mod+Q { quit skip-confirmation=true; }
-    Mod+RETURN { spawn "kitty"; }
-    Mod+Z { spawn-sh "zen"; }
+    Mod+Return { spawn "kitty"; }
+    Mod+W { spawn "kitty" "-e" "nmtui"; }
+    Mod+Z { spawn-sh "qutebrowser"; }
     Mod+M { spawn-sh "rofi -show drun"; }
-    Mod+P { spawn-sh "prismlauncher"; }
-    Mod+G { spawn-sh "nmtui"; }
-    Mod+N { spawn-sh "~/.dotfiles/config/niri/skip-wallpaper.sh"; }
+    Mod+E { spawn "kitty" "-e" "xplr"; }
+    Mod+C { spawn "kitty" "-e" "claude"; }
     Mod+O repeat=false { toggle-overview; }
     Mod+BACKSPACE repeat=false { close-window; }
+    Mod+Q { quit skip-confirmation=true; }
+
     Mod+H     { focus-column-left; }
     Mod+J     { focus-window-down; }
     Mod+K     { focus-window-up; }
@@ -225,7 +223,6 @@ binds {
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
     Mod+Ctrl+F { expand-column-to-available-width; }
-    Mod+C { center-column; }
     Mod+Ctrl+C { center-visible-columns; }
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
@@ -233,7 +230,7 @@ binds {
     Mod+Shift+Equal { set-window-height "+10%"; }
     Mod+V        { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
-    Mod+W { toggle-column-tabbed-display; }
+    Mod+X { toggle-column-tabbed-display; }
     Mod+S { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }

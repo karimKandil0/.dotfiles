@@ -55,7 +55,7 @@ change_wallpaper() {
     IMG="${UNUSED_WALLPAPERS[RANDOM % ${#UNUSED_WALLPAPERS[@]}]}"
 
     # Set wallpaper with swww (you can tweak transition options)
-    swww img "$IMG" --outputs "HDMI-A-1,DP-1" --transition-type fade --transition-duration 1 
+    swww img "$IMG" --outputs "DP-1" --transition-type fade --transition-duration 1 
 
     # Generate colorscheme with wal based on the current wallpaper
     wal -i "$IMG"
@@ -114,6 +114,20 @@ general {
     col.inactive_border = rgba(${WAL_INACTIVE#\#}aa)
 }
 EOF
+
+    # Update niri border colors
+    NIRI_CONF="${HOME}/.dotfiles/config/niri/config.kdl"
+    sed -i \
+      "s|active-color \"#[0-9a-fA-F]*\"    // WAL_ACTIVE|active-color \"${WAL_ACTIVE}\"    // WAL_ACTIVE|" \
+      "$NIRI_CONF"
+    sed -i \
+      "s|inactive-color \"#[0-9a-fA-F]*80\"  // WAL_INACTIVE|inactive-color \"${WAL_INACTIVE}80\"  // WAL_INACTIVE|" \
+      "$NIRI_CONF"
+
+    # Reload niri config if it's running
+    if pgrep -x niri >/dev/null 2>&1; then
+        niri msg action reconfigure || true
+    fi
 
     # Add the new wallpaper to the history
     echo "$IMG" >> "$HISTORY_FILE"

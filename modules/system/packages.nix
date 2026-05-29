@@ -8,24 +8,25 @@
   environment.systemPackages = with pkgs; [
     codex
     claude-code
+    rust-analyzer
     efibootmgr
     cargo
     wayland
     vulkan-loader
     vulkan-tools
+    gh-dash
     vulkan-headers
     mesa
     firefox
     qutebrowser
+    swaybg
     libGL
     waybar
-    socat
     wineWowPackages.stable
     virt-manager
     qemu
     feh
     git
-    mangohud
     aria2
     dig
     shellcheck
@@ -38,7 +39,6 @@
     sops
     age
     unzip
-    zed-editor
     bibata-cursors
     nodejs
     yarn

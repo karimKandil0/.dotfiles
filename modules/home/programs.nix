@@ -12,7 +12,6 @@
     qbittorrent
     lutris
     winetricks
-    cabextract
     cmatrix
     hyprshot
     obsidian
@@ -28,7 +27,6 @@
     nemo
     nodejs
     ffmpeg
-    w3m
     gcc
     prismlauncher
     jdk17

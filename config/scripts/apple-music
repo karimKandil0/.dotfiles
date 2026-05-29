@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-exec firefox --kiosk https://music.apple.com/eg/home

@@ -12,7 +12,6 @@
     gp = "git push";
     dl = "aria2c -d ~/Downloads -x 16 -s 16 -k 1M --file-allocation=none";
     la = "ls -a";
-
-    darlene = "docker exec -it Darlene picoclaw";
+    darlene = "docker exec -it dockerclaw-openclaw-cli-1 sh";
   };
 }
