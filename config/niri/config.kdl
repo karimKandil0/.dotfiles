@@ -231,7 +231,7 @@ binds {
     Mod+V        { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
     Mod+X { toggle-column-tabbed-display; }
-    Mod+S { screenshot; }
+    Mod+S { spawn-sh "~/.dotfiles/config/niri/screenshot.sh"; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }

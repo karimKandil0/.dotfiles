@@ -9,6 +9,9 @@
     bun
     vimPlugins.nvim-treesitter-parsers.markdown
     vimPlugins.nvim-treesitter-parsers.markdown_inline
+    grim
+    slurp
+    wl-clipboard-rs
     qbittorrent
     lutris
     winetricks

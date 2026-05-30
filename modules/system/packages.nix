@@ -8,6 +8,7 @@
   environment.systemPackages = with pkgs; [
     codex
     claude-code
+    slskd
     rust-analyzer
     efibootmgr
     cargo
