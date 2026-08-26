@@ -3,7 +3,7 @@
 
   ### User specific packages ###
 
-  home.packages = with pkgs; [
+home.packages = with pkgs; [
     myZen
     dmidecode
     bun

@@ -12,6 +12,8 @@
     zen-browser.url = "github:youwen5/zen-browser-flake";
     sops-nix.url = "github:Mic92/sops-nix";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
   };
 
   outputs =

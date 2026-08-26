@@ -89,14 +89,21 @@ require("lazy").setup({
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
       "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "rafamadriz/friendly-snippets",
     },
     config = function()
       local cmp = require("cmp")
+      local luasnip = require("luasnip")
+      require("luasnip.loaders.from_vscode").lazy_load()
+
       cmp.setup({
         snippet = {
           expand = function(args)
-            require("luasnip").lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
           end,
         },
         mapping = cmp.mapping.preset.insert({
@@ -104,10 +111,62 @@ require("lazy").setup({
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
           ["<Tab>"] = cmp.mapping.select_next_item(),
           ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+          ["<C-d>"] = cmp.mapping.scroll_docs(4),
+          ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "buffer", keyword_length = 3 },
+          { name = "path" },
         }),
+      })
+    end,
+  },
+
+  {
+    "stevearc/conform.nvim",
+    config = function()
+      require("conform").setup({
+        formatters_by_ft = {
+          lua = { "stylua" },
+          python = { "black" },
+          javascript = { "prettier" },
+          javascriptreact = { "prettier" },
+          typescript = { "prettier" },
+          typescriptreact = { "prettier" },
+          json = { "prettier" },
+          css = { "prettier" },
+          html = { "prettier" },
+          rust = { "rustfmt" },
+          nix = { "nixfmt" },
+          sh = { "shfmt" },
+          bash = { "shfmt" },
+        },
+        format_on_save = nil,
+      })
+    end,
+  },
+
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("lualine").setup({
+        options = {
+          theme = "rose-pine",
+          component_separators = "|",
+          section_separators = "",
+          globalstatus = true,
+        },
+        sections = {
+          lualine_a = { "mode" },
+          lualine_b = { "branch", "diff", "diagnostics" },
+          lualine_c = { { "filename", path = 1 } },
+          lualine_x = { "filetype" },
+          lualine_y = { "progress" },
+          lualine_z = { "location" },
+        },
       })
     end,
   },
@@ -188,4 +247,5 @@ require("lazy").setup({
 }, {
   checker = { enabled = false },
   lockfile = vim.fn.stdpath("state") .. "/lazy-lock.json",
+  git = { timeout = 300 },
 })

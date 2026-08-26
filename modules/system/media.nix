@@ -1,63 +1,64 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  dl-music = pkgs.writeShellScriptBin "dl-music" ''
+    set -e
+    if [ -z "$1" ]; then
+      echo "usage: dl-music <youtube-music-url>"
+      exit 1
+    fi
+    exec ${pkgs.yt-dlp}/bin/yt-dlp \
+      -x \
+      --audio-format mp3 \
+      --audio-quality 0 \
+      --embed-metadata \
+      --embed-thumbnail \
+      --downloader aria2c \
+      --downloader-args "aria2c:-x 16 -s 16" \
+      --parse-metadata "%(album_artist,artist)s:%(meta_album_artist)s" \
+      -o "/home/karimkandil/music/%(album_artist,artist)s/%(album,title)s/%(track_number|)s%(track_number& - |)s%(title)s.%(ext)s" \
+      "$@"
+  '';
+in
 {
   systemd.tmpfiles.rules = [
-    "d /mnt/storage/music              0755 root root -"
-    "d /mnt/storage/downloads          0755 root root -"
-    "d /mnt/storage/downloads/complete   0755 root root -"
-    "d /mnt/storage/downloads/incomplete 0755 root root -"
-    "d /mnt/storage/downloads/slskd      0755 root root -"
+    "d /home/karimkandil/music       0755 karimkandil      users  -"
   ];
 
-  # Navidrome — music server (port 4533)
+  environment.systemPackages = [ dl-music ];
+
+  services.uptime-kuma = {
+    enable = true;
+    settings = {
+      PORT = "3001";
+      HOST = "0.0.0.0";
+    };
+  };
+
+  services.searx = {
+    enable = true;
+    redisCreateLocally = true;
+    settings = {
+      server.port = 8888;
+      server.bind_address = "0.0.0.0";
+      server.secret_key = "changeme";
+      ui.default_theme = "simple";
+      search.safe_search = 0;
+    };
+  };
+
   services.navidrome = {
     enable = true;
     settings = {
-      MusicFolder = "/mnt/storage/music";
+      MusicFolder = "/home/karimkandil/music";
       Address = "0.0.0.0";
       Port = 4533;
       ScanSchedule = "@every 1h";
     };
   };
 
-  # Lidarr — music collection manager (port 8686)
-  services.lidarr = {
-    enable = true;
-    user = "root";
-    group = "root";
-    dataDir = "/var/lib/lidarr";
-  };
-
-  # Prowlarr — indexer manager (port 9696, runs as DynamicUser)
-  services.prowlarr.enable = true;
-
-  # slskd — Soulseek client with REST API (port 5030 web, 5031 api)
-  systemd.services.slskd = {
-    description = "slskd Soulseek client";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    preStart = "mkdir -p /var/lib/slskd";
-    serviceConfig = {
-      Type = "simple";
-      User = "root";
-      Group = "root";
-      ExecStart = "${pkgs.slskd}/bin/slskd --app-dir /var/lib/slskd";
-      Restart = "on-failure";
-    };
-  };
-
-  # qBittorrent — torrent client (port 8080)
-  systemd.services.qbittorrent = {
-    description = "qBittorrent-nox";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    preStart = "mkdir -p /var/lib/qbittorrent";
-    serviceConfig = {
-      Type = "simple";
-      User = "root";
-      Group = "root";
-      ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --webui-port=8080 --profile=/var/lib/qbittorrent";
-      Restart = "on-failure";
-    };
+  systemd.services.navidrome.serviceConfig = {
+    ProtectHome = lib.mkForce false;
+    BindReadOnlyPaths = [ "/home/karimkandil/music" ];
   };
 }

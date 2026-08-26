@@ -9,7 +9,9 @@ map("n", "<leader>x", "<cmd>wq<cr>", { silent = true, desc = "Write + quit" })
 map("n", "<leader>q", "<cmd>q<cr>", { silent = true, desc = "Quit" })
 
 -- LSP workflow
-map("n", "<leader>fm", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format" })
+map("n", "<leader>fm", function()
+  require("conform").format({ async = true, lsp_fallback = true })
+end, { desc = "Format" })
 map("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition" })
 map("n", "gr", vim.lsp.buf.references, { desc = "Goto references" })
 map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
