@@ -28,6 +28,9 @@
     gettext
     usbutils
 
+    # AI
+    claude-code
+
     # nix tooling
     sops
     age
