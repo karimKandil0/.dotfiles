@@ -19,6 +19,7 @@
       3001   # Uptime Kuma
       8888   # Searx
       18789  # Openclaw
+      8384   # Syncthing UI
     ];
     allowedUDPPorts = [ ];
   };
