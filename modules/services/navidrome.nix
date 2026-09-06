@@ -8,7 +8,7 @@
     enable = true;
     settings = {
       MusicFolder = "/home/karimkandil/music";
-      Address = "127.0.0.1";
+      Address = "0.0.0.0";
       Port = 4533;
       ScanSchedule = "@every 1h";
     };

@@ -27,7 +27,7 @@ in
     enable = true;
     settings = {
       PORT = "3001";
-      HOST = "127.0.0.1";
+      HOST = "0.0.0.0";
     };
   };
 
@@ -36,7 +36,7 @@ in
     redisCreateLocally = true;
     settings = {
       server.port = 8888;
-      server.bind_address = "127.0.0.1";
+      server.bind_address = "0.0.0.0";
       server.secret_key = "changeme";
       ui.default_theme = "simple";
       search.safe_search = 0;
