@@ -9,6 +9,7 @@
     ./modules/services/navidrome.nix
     ./modules/services/monitoring.nix
     ./modules/services/adguard.nix
+    ./modules/services/caddy.nix
     ./modules/services/syncthing.nix
   ];
 }
