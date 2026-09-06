@@ -8,6 +8,5 @@
     ./modules/services/minecraft.nix
     ./modules/services/navidrome.nix
     ./modules/services/monitoring.nix
-    ./modules/services/caddy.nix
   ];
 }
