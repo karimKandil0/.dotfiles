@@ -5,7 +5,7 @@
     srs = "sudo nixos-rebuild switch --flake ~/.dotfiles#k-nix";
     dots = "nvim ~/.dotfiles";
     conf = "nvim ~/.dotfiles/config";
-    services = "nvim ~/.dotfiles/modules/system/services.nix";
+    services = "nvim ~/.dotfiles/modules/services";
     nx = "nix develop";
     ga = "git add";
     gm = "git commit -m";

@@ -1,100 +1,47 @@
 { pkgs, ... }:
 {
-
-  ### Allow unfree packages ###
   nixpkgs.config.allowUnfree = true;
 
-  ### Download packages system-wide ###
   environment.systemPackages = with pkgs; [
-    codex
-    claude-code
-    slskd
-    rust-analyzer
-    efibootmgr
-    cargo
-    wayland
-    vulkan-loader
-    vulkan-tools
-    gh-dash
-    vulkan-headers
-    mesa
-    firefox
-    qutebrowser
-    swaybg
-    libGL
-    waybar
-    wineWowPackages.stable
-    virt-manager
-    qemu
-    feh
+    # version control & dev
     git
-    aria2
-    dig
-    shellcheck
-    statix
-    deadnix
-    ruff
-    zip
-    gettext
-    tmux
-    sops
-    age
-    unzip
-    bibata-cursors
+    cargo
+    rust-analyzer
     nodejs
     yarn
-    libdrm
-    meson
-    ninja
-    libdisplay-info
-    libliftoff
-    hwdata
-    seatd
-    pcre2
-    glibc
+    python3
+
+    # shell & system tools
     vim
-    ripgrep
-    tree-sitter
-    lua
-    luarocks
-    usbutils
+    tmux
     btop
-    docker
+    curl
+    wget
+    ripgrep
+    tree
+    fastfetch
+    unzip
+    zip
+    unrar
+    aria2
+    dig
+    gettext
+    usbutils
+
+    # nix tooling
+    sops
+    age
+    statix
+    deadnix
+    shellcheck
+
+    # python tooling
+    ruff
+
+    # server utils
     openssl
     zlib
-    vial
-    curl
-    xplr
-    kitty
+    docker
     rcon-cli
-    swww
-    pywal
-    rofi
-    fastfetch
-    alsa-utils
-    pulsemixer
-    pulseaudio
-    unrar
-    tailscale
-    tree
-    python3
   ];
-
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
-
-  services.udev.packages = [
-    pkgs.vial
-    pkgs.game-devices-udev-rules
-  ];
-
-  programs.localsend = {
-    enable = true;
-    openFirewall = true;
-  };
-
-  programs.steam.enable = true;
-  programs.gamemode.enable = true;
-  programs.firejail.enable = true;
 }

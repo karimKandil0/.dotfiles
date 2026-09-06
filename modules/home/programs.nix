@@ -1,61 +1,41 @@
-{ pkgs, pkgs-unstable, myZen, ... }:
+{ pkgs, ... }:
 {
-
-  ### User specific packages ###
-
-home.packages = with pkgs; [
-    myZen
-    dmidecode
-    bun
-    vimPlugins.nvim-treesitter-parsers.markdown
-    vimPlugins.nvim-treesitter-parsers.markdown_inline
-    grim
-    slurp
-    wl-clipboard-rs
-    qbittorrent
-    lutris
-    winetricks
-    cmatrix
-    hyprshot
-    obsidian
-    cava
-    kitty
+  home.packages = with pkgs; [
+    # editor & nix
     neovim
-    mako
-    hyprlock
-    libnotify
     home-manager
     nil
     nixpkgs-fmt
-    nemo
-    nodejs
-    ffmpeg
-    gcc
-    prismlauncher
-    jdk17
-    typioca
-    cmake
-    ninja
+    vimPlugins.nvim-treesitter-parsers.markdown
+    vimPlugins.nvim-treesitter-parsers.markdown_inline
+
+    # core dev
     git
+    bun
+    nodejs
     python3
     python3Packages.pip
-    python3Packages.tinytuya
     python3Packages.numpy
-    python3Packages.pyaudio
+    python3Packages.pyserial
     python3Packages.evdev
     python3Packages.virtualenv
+    gcc
     gnumake
+    cmake
+    ninja
     flex
     bison
     gperf
     ccache
-    dfu-util
-    libusb1
-    python3Packages.pyserial
-    ncurses
     pkg-config
+    ncurses
+    ffmpeg
+    dmidecode
+
+    # ESP32 toolchain
     esptool
     cargo-espmonitor
+    dfu-util
+    libusb1
   ];
-
 }

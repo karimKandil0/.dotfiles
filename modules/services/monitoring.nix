@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 
 let
   dl-music = pkgs.writeShellScriptBin "dl-music" ''
@@ -21,17 +21,13 @@ let
   '';
 in
 {
-  systemd.tmpfiles.rules = [
-    "d /home/karimkandil/music       0755 karimkandil      users  -"
-  ];
-
   environment.systemPackages = [ dl-music ];
 
   services.uptime-kuma = {
     enable = true;
     settings = {
       PORT = "3001";
-      HOST = "0.0.0.0";
+      HOST = "127.0.0.1";
     };
   };
 
@@ -40,25 +36,10 @@ in
     redisCreateLocally = true;
     settings = {
       server.port = 8888;
-      server.bind_address = "0.0.0.0";
+      server.bind_address = "127.0.0.1";
       server.secret_key = "changeme";
       ui.default_theme = "simple";
       search.safe_search = 0;
     };
-  };
-
-  services.navidrome = {
-    enable = true;
-    settings = {
-      MusicFolder = "/home/karimkandil/music";
-      Address = "0.0.0.0";
-      Port = 4533;
-      ScanSchedule = "@every 1h";
-    };
-  };
-
-  systemd.services.navidrome.serviceConfig = {
-    ProtectHome = lib.mkForce false;
-    BindReadOnlyPaths = [ "/home/karimkandil/music" ];
   };
 }
