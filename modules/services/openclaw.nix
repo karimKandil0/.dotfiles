@@ -12,7 +12,6 @@
         TERM = "xterm-256color";
         OPENCLAW_CONFIG_DIR = "/home/node/.openclaw";
         OPENCLAW_WORKSPACE_DIR = "/home/node/.openclaw/workspace";
-        OPENCLAW_GATEWAY_TOKEN = "f5a9765d32dd76924140c7843fb4e0281075a8e8f4d08f8594e654087b98f115";
         OPENCLAW_GATEWAY_BIND = "lan";
         OPENCLAW_DISABLE_BONJOUR = "";
         TZ = "Africa/Cairo";
