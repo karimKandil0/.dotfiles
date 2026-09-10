@@ -13,10 +13,8 @@ let
       --audio-quality 0 \
       --embed-metadata \
       --embed-thumbnail \
-      --downloader aria2c \
-      --downloader-args "aria2c:-x 16 -s 16" \
-      --parse-metadata "%(album_artist,artist)s:%(meta_album_artist)s" \
-      -o "/home/karimkandil/music/%(album_artist,artist)s/%(album,title)s/%(track_number|)s%(track_number& - |)s%(title)s.%(ext)s" \
+--parse-metadata "%(album_artist,artist)s:%(meta_album_artist)s" \
+      -o "/mnt/hdd/media/music/%(album_artist,artist)s/%(album,title)s/%(track_number|)s%(track_number& - |)s%(title)s.%(ext)s" \
       "$@"
   '';
 in
@@ -30,6 +28,8 @@ in
       HOST = "0.0.0.0";
     };
   };
+
+  systemd.services.uptime-kuma.serviceConfig.SupplementaryGroups = [ "docker" ];
 
   services.searx = {
     enable = true;

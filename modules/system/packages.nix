@@ -44,7 +44,7 @@
     # server utils
     openssl
     zlib
-    docker
+    docker_29
     rcon-cli
   ];
 }

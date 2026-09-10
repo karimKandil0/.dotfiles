@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [ ../../hardware-configuration.nix ];
 
@@ -29,7 +29,16 @@
     "ntfs3"
   ];
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    package = pkgs.docker_29;
+  };
+
+  fileSystems."/mnt/hdd" = {
+    device = "/dev/disk/by-uuid/d040eeb3-a134-449c-a830-da0c8741dff5";
+    fsType = "ext4";
+    options = [ "defaults" "nofail" ];
+  };
 
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
   sops.secrets.rcon_password = { };

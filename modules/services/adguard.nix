@@ -14,8 +14,8 @@
           "1.1.1.1"
         ];
         upstream_dns = [
-          "https://dns.quad9.net/dns-query"
-          "https://cloudflare-dns.com/dns-query"
+          "127.0.0.1:5335"
+          "[/ts.net/]100.100.100.100"
         ];
         fallback_dns = [ "9.9.9.9" "1.1.1.1" ];
         enable_dnssec = true;

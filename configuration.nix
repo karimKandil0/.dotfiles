@@ -9,6 +9,11 @@
     ./modules/services/navidrome.nix
     ./modules/services/monitoring.nix
     ./modules/services/adguard.nix
+    ./modules/services/unbound.nix
     ./modules/services/syncthing.nix
+    ./modules/services/dashboard.nix
+    ./modules/services/media.nix
+    ./modules/services/extras.nix
+    ./modules/services/openclaw.nix
   ];
 }
